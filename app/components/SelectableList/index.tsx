@@ -143,20 +143,21 @@ const SelectableList = ({
   /** Always make sure the selected item is within the screen's view. */
   useEffect(() => {
     // Delay "isMounted" so that the enter animation doesn't get interrupted.
-    // I was stuck on this for like 12 hours and was wondering why
-    // the animation wasn't finishing...
     if (isMounted && containerRef.current && fullOptions.length) {
-      const { children } = containerRef.current;
+      const container = containerRef.current;
+      const { children } = container;
+      const targetIndex = loadingNextItems ? activeIndex + 1 : activeIndex;
+      const targetElement = children[targetIndex] as HTMLElement;
 
-      // Make sure the pagination loading indicator is in view.
-      if (loadingNextItems) {
-        children[activeIndex + 1]?.scrollIntoView({
-          block: "center",
-        });
-      } else {
-        children[activeIndex]?.scrollIntoView({
-          block: "center",
-        });
+      if (targetElement) {
+        // Calculate the scroll position to keep the element centered
+        const elementTop = targetElement.offsetTop;
+        const elementHeight = targetElement.offsetHeight;
+        const containerHeight = container.clientHeight;
+        const scrollPosition = elementTop - (containerHeight / 2) + (elementHeight / 2);
+        
+        // Use direct scrollTop assignment for immediate effect
+        container.scrollTop = Math.max(0, scrollPosition);
       }
     }
   }, [activeIndex, isMounted, fullOptions.length, loadingNextItems]);

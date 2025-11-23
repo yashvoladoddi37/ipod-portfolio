@@ -47,6 +47,8 @@ const LeftPanel = styled.div<PanelProps>`
 
 const ContentContainer = styled.div`
   position: relative;
+  height: 100%;
+  overflow: hidden;
 `;
 
 interface Props {

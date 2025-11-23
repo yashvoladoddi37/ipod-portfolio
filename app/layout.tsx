@@ -61,7 +61,6 @@ export default function RootLayout({
       <body>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
-      <Script src="https://js-cdn.music.apple.com/musickit/v3/musickit.js" />
     </html>
   );
 }

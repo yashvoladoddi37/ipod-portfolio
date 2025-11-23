@@ -32,7 +32,6 @@
     "@types/cookie": "^0.5.1",
     "@types/he": "^1.1.2",
     "@types/lodash.uniqby": "^4.7.7",
-    "@types/musickit-js": "^1.0.8",
     "@types/node": "^20.18.0",
     "@types/pluralize": "^0.0.29",
     "@types/react": "^18.3.12",

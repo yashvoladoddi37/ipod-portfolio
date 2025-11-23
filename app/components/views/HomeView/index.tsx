@@ -17,7 +17,6 @@ import {
 import {
   useAudioPlayer,
   useEventListener,
-  useMusicKit,
   useScrollHandler,
   useSettings,
   useSpotifySDK,
@@ -31,8 +30,6 @@ const strings = {
 
 const HomeView = () => {
   const { isAuthorized } = useSettings();
-  const { signIn: signInWithApple, isConfigured: isMkConfigured } =
-    useMusicKit();
   const { nowPlayingItem } = useAudioPlayer();
   const { signIn: signInWithSpotify } = useSpotifySDK();
   const { showView, viewStack } = useViewContext();
@@ -67,23 +64,11 @@ const HomeView = () => {
         component: () => <SettingsView />,
         preview: SplitScreenPreview.Settings,
       },
-      // Show the sign in buttons if the user is not logged in.
+      // Show the sign in button if the user is not logged in.
       ...getConditionalOption(!isAuthorized, {
-        type: "actionSheet",
-        id: viewConfigMap.signinPopup.id,
-        label: "Sign in",
-        listOptions: [
-          {
-            type: "action",
-            label: "Apple Music",
-            onSelect: signInWithApple,
-          },
-          {
-            type: "action",
-            label: "Spotify",
-            onSelect: signInWithSpotify,
-          },
-        ],
+        type: "action",
+        label: "Sign in with Spotify",
+        onSelect: signInWithSpotify,
         preview: SplitScreenPreview.Music,
       }),
       ...getConditionalOption(!!nowPlayingItem, {
@@ -94,7 +79,7 @@ const HomeView = () => {
         preview: SplitScreenPreview.NowPlaying,
       }),
     ],
-    [isAuthorized, nowPlayingItem, signInWithApple, signInWithSpotify]
+    [isAuthorized, nowPlayingItem, signInWithSpotify]
   );
 
   const [scrollIndex] = useScrollHandler(viewConfigMap.home.id, options);
