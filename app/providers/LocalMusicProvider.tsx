@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useRef, useState, useEffect } from "react";
+import { createContext, useCallback, useContext, useRef, useState, useEffect, useMemo } from "react";
 import { useSettings } from "hooks";
 import { playlistTracks } from "lib/playlistTracks";
 import { encodeImageUrl } from "utils";
@@ -290,7 +290,7 @@ export const LocalMusicProvider = ({ children }: Props) => {
     }
   }, []);
 
-  const contextValue: LocalMusicHook = {
+  const contextValue: LocalMusicHook = useMemo(() => ({
     isReady,
     currentTrack,
     isPlaying,
@@ -304,7 +304,21 @@ export const LocalMusicProvider = ({ children }: Props) => {
     skipPrevious,
     seekToTime,
     setVolume,
-  };
+  }), [
+    isReady,
+    currentTrack,
+    isPlaying,
+    currentTime,
+    duration,
+    volume,
+    play,
+    pause,
+    resume,
+    skipNext,
+    skipPrevious,
+    seekToTime,
+    setVolume,
+  ]);
 
   return (
     <LocalMusicContext.Provider value={contextValue}>

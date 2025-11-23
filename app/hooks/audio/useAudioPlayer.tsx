@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useState,
+  useMemo,
 } from "react";
 
 import { useEventListener, useMKEventListener } from "hooks";
@@ -515,7 +516,7 @@ export const AudioPlayerProvider = ({ children }: Props) => {
 
   return (
     <AudioPlayerContext.Provider
-      value={{
+      value={useMemo(() => ({
         playbackInfo,
         nowPlayingItem,
         volume,
@@ -528,7 +529,20 @@ export const AudioPlayerProvider = ({ children }: Props) => {
         updatePlaybackInfo,
         skipNext,
         skipPrevious,
-      }}
+      }), [
+        playbackInfo,
+        nowPlayingItem,
+        volume,
+        play,
+        pause,
+        seekToTime,
+        handleChangeVolume,
+        togglePlayPause,
+        updateNowPlayingItem,
+        updatePlaybackInfo,
+        skipNext,
+        skipPrevious,
+      ])}
     >
       {children}
     </AudioPlayerContext.Provider>
