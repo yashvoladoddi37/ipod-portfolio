@@ -25,6 +25,9 @@ const Label = styled.h3<LabelProps>`
   font-size: 12px;
   margin: auto 0;
   text-align: ${(props) => props.$textAlign};
+  white-space: nowrap;
+  font-weight: 600;
+  color: #000000;
 `;
 
 const TrackProgress = () => {

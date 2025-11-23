@@ -11,6 +11,24 @@ export const getArtwork = (size: number | string, url?: string) => {
   return urlWithSize;
 };
 
+/** Properly encode URLs for images with special characters */
+export const encodeImageUrl = (url: string) => {
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+
+  // Split the URL into path and filename
+  const parts = url.split('/');
+  const filename = parts.pop();
+  const path = parts.join('/');
+
+  if (!filename) return url;
+
+  // Encode the filename part only, preserving the path structure
+  const encodedFilename = encodeURIComponent(filename);
+  return `${path}/${encodedFilename}`;
+};
+
 export const setDocumentSongTitle = (song?: AppleMusicApi.Song) => {
   document.title = song
     ? `${song.attributes?.name ?? "Music"} – iPod.js`
@@ -22,7 +40,17 @@ export const getMediaOptions = (
   type: "album" | "song" | "playlist",
   id: string
 ): SelectableListOption[] => {
-  const music = window.MusicKit.getInstance();
+  // Safeguard: if MusicKit is not available (e.g. local-only playback),
+  // don't crash the UI – just return no extra media options.
+  if (typeof window === "undefined" || !(window as any).MusicKit) {
+    return [];
+  }
+
+  const music = (window as any).MusicKit.getInstance?.();
+
+  if (!music) {
+    return [];
+  }
 
   return [
     {

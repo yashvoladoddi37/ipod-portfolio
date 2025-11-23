@@ -29,6 +29,8 @@ const Label = styled.h3<LabelProps>`
   margin: auto 0;
   text-align: ${(props) => props.$textAlign};
   white-space: nowrap;
+  font-weight: 600;
+  color: #000000;
 `;
 
 interface Props {
@@ -58,7 +60,7 @@ const Scrubber = ({ isScrubbing }: Props) => {
   }, 300);
 
   const scrubForward = useCallback(() => {
-    if (scrubberTime === duration || !isScrubbing) return;
+    if (scrubberTime === duration) return;
     const newTime = scrubberTime + 1;
 
     if (newTime < duration) {
@@ -66,10 +68,10 @@ const Scrubber = ({ isScrubbing }: Props) => {
       handleSeek(newTime);
       setScrubberTime(newTime);
     }
-  }, [scrubberTime, duration, isScrubbing, handleSeek]);
+  }, [scrubberTime, duration, handleSeek]);
 
   const scrubBackward = useCallback(() => {
-    if (scrubberTime === 0 || !isScrubbing) return;
+    if (scrubberTime === 0) return;
     const newTime = scrubberTime - 1;
 
     if (newTime >= 0) {
@@ -77,7 +79,7 @@ const Scrubber = ({ isScrubbing }: Props) => {
       handleSeek(newTime);
       setScrubberTime(newTime);
     }
-  }, [scrubberTime, handleSeek, isScrubbing]);
+  }, [scrubberTime, handleSeek]);
 
   const refresh = useCallback(
     (force = false) => {

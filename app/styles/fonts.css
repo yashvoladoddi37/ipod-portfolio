@@ -1,0 +1,69 @@
+/* Ranade Font Family */
+@font-face {
+  font-family: 'Ranade';
+  src: url('/fonts/Ranade_Complete/Fonts/Ranade-Light.woff2') format('woff2'),
+       url('/fonts/Ranade_Complete/Fonts/Ranade-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ranade';
+  src: url('/fonts/Ranade_Complete/Fonts/Ranade-Regular.woff2') format('woff2'),
+       url('/fonts/Ranade_Complete/Fonts/Ranade-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ranade';
+  src: url('/fonts/Ranade_Complete/Fonts/Ranade-Medium.woff2') format('woff2'),
+       url('/fonts/Ranade_Complete/Fonts/Ranade-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ranade';
+  src: url('/fonts/Ranade_Complete/Fonts/Ranade-SemiBold.woff2') format('woff2'),
+       url('/fonts/Ranade_Complete/Fonts/Ranade-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* FK Grotesk Font Family */
+@font-face {
+  font-family: 'FK Grotesk';
+  src: url('/fonts/fk-grotesk-font-family-1763096180-0/FKGroteskTrial-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FK Grotesk';
+  src: url('/fonts/fk-grotesk-font-family-1763096180-0/FKGroteskTrial-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FK Grotesk';
+  src: url('/fonts/fk-grotesk-font-family-1763096180-0/FKGroteskTrial-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FK Grotesk';
+  src: url('/fonts/fk-grotesk-font-family-1763096180-0/FKGroteskTrial-Bold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}

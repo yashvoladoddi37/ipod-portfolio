@@ -34,6 +34,7 @@ const Subtext = styled(Text)`
 const strings = {
   spotify: "Spotify",
   apple: "Apple Music",
+  local: "Local Music",
   none: "None",
   selected: "Selected service",
 };
@@ -42,7 +43,11 @@ const ServicePreview = () => {
   const { service } = useSettings();
 
   const imgUrl =
-    service === "spotify" ? "spotify_icon.svg" : "apple_music_icon.svg";
+    service === "spotify"
+      ? "spotify_icon.svg"
+      : service === "local"
+        ? "song_icon.svg"
+        : "apple_music_icon.svg";
 
   const text = strings[service ?? "none"];
 

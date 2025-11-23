@@ -15,8 +15,8 @@ export const getRootAppUrl = () => {
 };
 
 export const getSpotifyRedirectUri = () => {
-  // Example: http://localhost:3000/ipod/callback
-  return `${getRootAppUrl()}/ipod`;
+  // Example: http://localhost:3000/callback
+  return `${getRootAppUrl()}`;
 };
 
 export const getSpotifyAuthorizationHeader = (

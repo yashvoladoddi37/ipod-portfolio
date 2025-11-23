@@ -36,6 +36,19 @@ const Artwork = styled.img`
   width: 100%;
   transform: rotateY(18deg);
   border: 1px solid #f3f3f3;
+
+  &[src=""], &:not([src]) {
+    background: linear-gradient(135deg, #333 0%, #555 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::after {
+      content: "♪";
+      font-size: 2rem;
+      color: #999;
+    }
+  }
 `;
 
 const InfoContainer = styled.div`
@@ -44,13 +57,21 @@ const InfoContainer = styled.div`
 `;
 
 const Text = styled.h3`
-  margin: 0;
+  margin: 0 0 8px 0;
   font-size: 0.92rem;
+  color: #000000;
+  font-family: 'Ranade', 'FK Grotesk', -apple-system, BlinkMacSystemFont,
+    system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
 `;
 
 const Subtext = styled(Text)`
-  color: rgb(99, 101, 103);
+  color: #333333;
   font-size: 0.75rem;
+  margin: 0 0 6px 0;
+  font-weight: 600;
 `;
 
 const ControlsContainer = styled.div`
@@ -86,12 +107,22 @@ const NowPlaying = ({ hideArtwork, onHide }: Props) => {
   useMKEventListener("playbackStateDidChange", handlePlaybackChange);
 
   const artworkUrl = Utils.getArtwork(300, nowPlayingItem?.artwork?.url);
+  const encodedArtworkUrl = artworkUrl ? Utils.encodeImageUrl(artworkUrl) : artworkUrl;
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    console.log('Image failed to load:', encodedArtworkUrl);
+    e.currentTarget.src = Utils.getArtwork(300, undefined); // Use default artwork
+  };
 
   return (
     <Container>
       <MetadataContainer>
         <ArtworkContainer $isHidden={hideArtwork}>
-          <Artwork src={artworkUrl} />
+          <Artwork
+            src={encodedArtworkUrl}
+            onError={handleImageError}
+            alt={nowPlayingItem?.name || 'Album artwork'}
+          />
         </ArtworkContainer>
         <InfoContainer>
           <Text>{nowPlayingItem?.name}</Text>

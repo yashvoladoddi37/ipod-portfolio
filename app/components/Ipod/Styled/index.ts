@@ -13,7 +13,15 @@ export const Shell = styled.div<{ $deviceTheme: DeviceThemeName }>`
   border-radius: 30px;
   box-shadow: inset 0 0 2.4em #555;
   background: ${({ $deviceTheme }) => getTheme($deviceTheme).body.background};
-  -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(250, 250, 250, 0.3)));
+  -webkit-box-reflect: below 0px
+    -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(transparent),
+      color-stop(50%, transparent),
+      to(rgba(250, 250, 250, 0.3))
+    );
   animation: descend 1.5s ease;
   overflow: hidden;
 
@@ -42,15 +50,19 @@ export const Shell = styled.div<{ $deviceTheme: DeviceThemeName }>`
   }
 `;
 
-export const ScreenContainer = styled.div`
+export const ScreenContainer = styled.div<{ $deviceTheme: DeviceThemeName }>`
   position: relative;
   height: 260px;
   margin: ${Unit.LG} ${Unit.LG} 0;
-  border: 4px solid black;
+  border: 4px solid ${({ $deviceTheme }) =>
+    $deviceTheme === 'birthday' ? '#333333' : 'black'};
   border-radius: ${Unit.XS};
   overflow: hidden;
-  background: white;
+  background: ${({ $deviceTheme }) =>
+    $deviceTheme === 'birthday' ? '#f0f0f0' : 'white'};
   animation: fadeFromBlack 0.5s;
+  box-shadow: ${({ $deviceTheme }) =>
+    $deviceTheme === 'birthday' ? 'inset 0 2px 8px rgba(0, 0, 0, 0.5)' : 'none'};
 
   @keyframes fadeFromBlack {
     0% {

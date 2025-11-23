@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { Unit } from "utils/constants";
-import { APP_URL } from "utils/constants/api";
 
 const Container = styled(motion.div)`
   display: flex;
@@ -13,31 +11,9 @@ const Container = styled(motion.div)`
   background: linear-gradient(180deg, #b1b5c0 0%, #686e7a 100%);
 `;
 
-const Image = styled.img`
-  height: 4em;
-  width: 4em;
-  margin: ${Unit.XS};
-`;
-
-const Text = styled.h3`
-  margin: 0;
-  font-size: 16px;
-  font-weight: 500;
-`;
-
-const Subtext = styled.h3`
-  margin: 0;
-  font-size: 14px;
-  font-weight: 500;
-`;
-
 const SettingsPreview = () => {
   return (
-    <Container>
-      <Image alt="React logo" src={`${APP_URL}/react_logo.svg`} />
-      <Text>iPod.js</Text>
-      <Subtext>by Tanner V</Subtext>
-    </Container>
+    <Container />
   );
 };
 

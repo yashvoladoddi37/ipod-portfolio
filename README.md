@@ -11,8 +11,6 @@
 [![React](https://img.shields.io/badge/React-18-blue?style=flat&logo=react)](https://reactjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat&logo=typescript)](https://www.typescriptlang.org)
 
-**Created by [Tanner Villarete](https://tannerv.com)** • [LinkedIn](http://linkedin.com/in/tvillarete) • [Website](http://tannerv.com)
-
 </div>
 
 ---
@@ -145,8 +143,6 @@ APPLE_DEVELOPER_TOKEN=your_apple_developer_token
 3. Generate a **private key** for MusicKit
 4. Create a **developer token** (JWT)
 
-> 💡 **Need help generating Apple Music JWTs?** Check out the [**Apple Music JWT Generator**](https://github.com/tvillarete/apple-music-jwt-generator) — a helpful tool I created to simplify the JWT creation process
-
 📚 [Apple MusicKit JS Documentation](https://developer.apple.com/documentation/musickitjs)  
 📚 [Getting Keys and Creating Tokens Guide](https://developer.apple.com/documentation/applemusicapi/getting_keys_and_creating_tokens)
 
@@ -190,16 +186,3 @@ Contributions are welcome! This project is built to be highly extensible.
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
-
----
-
-<div align="center">
-
-**Made with ❤️ by [Tanner Villarete](https://tannerv.com)**
-
-*Bringing back the magic of the iPod Classic, one click at a time*
-
-[![GitHub stars](https://img.shields.io/github/stars/tvillarete/ipod-classic-js?style=social)](https://github.com/tvillarete/ipod-classic-js/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/tvillarete/ipod-classic-js?style=social)](https://github.com/tvillarete/ipod-classic-js/network/members)
-
-</div>

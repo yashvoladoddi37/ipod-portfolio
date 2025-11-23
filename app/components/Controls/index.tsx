@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import { useEventListener, useVolumeHandler } from "hooks";
+import { useEventListener, useVolumeHandler, useAudioPlayer } from "hooks";
 import styled from "styled-components";
 import { Unit } from "utils/constants";
 
@@ -43,6 +43,7 @@ const ScrubberContainer = styled.div<ContainerProps>`
 
 const Controls = () => {
   const { volume, active, setEnabled } = useVolumeHandler();
+  const { playbackInfo, seekToTime } = useAudioPlayer();
   const [isScrubbing, setIsScrubbing] = useState(false);
 
   const handleCenterClick = useCallback(() => {
@@ -57,7 +58,24 @@ const Controls = () => {
     }
   }, [isScrubbing, setEnabled]);
 
+  // Global seeking functions that work even when scrubber is not active
+  const handleGlobalSeekForward = useCallback(() => {
+    if (!isScrubbing && playbackInfo.duration > 0) {
+      const newTime = Math.min(playbackInfo.currentTime + 5, playbackInfo.duration);
+      seekToTime(newTime);
+    }
+  }, [isScrubbing, playbackInfo.currentTime, playbackInfo.duration, seekToTime]);
+
+  const handleGlobalSeekBackward = useCallback(() => {
+    if (!isScrubbing && playbackInfo.duration > 0) {
+      const newTime = Math.max(playbackInfo.currentTime - 5, 0);
+      seekToTime(newTime);
+    }
+  }, [isScrubbing, playbackInfo.currentTime, seekToTime]);
+
   useEventListener<IpodEvent>("centerclick", handleCenterClick);
+  useEventListener<IpodEvent>("forwardscroll", handleGlobalSeekForward);
+  useEventListener<IpodEvent>("backwardscroll", handleGlobalSeekBackward);
 
   return (
     <Container>

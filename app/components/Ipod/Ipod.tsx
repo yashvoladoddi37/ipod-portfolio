@@ -8,6 +8,7 @@ import {
   useEffectOnce,
 } from "hooks";
 import { ClickWheel, ViewManager } from "components";
+import LyricsDisplay from "components/LyricsDisplay";
 import {
   ScreenContainer,
   ClickWheelContainer,
@@ -17,8 +18,8 @@ import {
   Sticker3,
 } from "components/Ipod/Styled";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SpotifySDKProvider } from "providers/SpotifySdkProvider";
-import { MusicKitProvider } from "providers/MusicKitProvider";
+import { LocalMusicProvider } from "providers/LocalMusicProvider";
+import CoverArtReflection from "components/CoverArtReflection";
 import ViewContextProvider from "providers/ViewContextProvider";
 import { useRouter } from "next/navigation";
 import { GlobalStyles } from "components/Ipod/GlobalStyles";
@@ -31,9 +32,14 @@ type Props = {
    * This is the code that is used to get the access token.
    */
   spotifyCallbackCode?: string;
+  playlistMetadata: any[];
 };
 
-const Ipod = ({ appleAccessToken, spotifyCallbackCode }: Props) => {
+const Ipod = ({
+  appleAccessToken,
+  spotifyCallbackCode,
+  playlistMetadata,
+}: Props) => {
   const router = useRouter();
   const queryClient = new QueryClient();
   const [isLoading, setIsLoading] = useState(true);
@@ -66,30 +72,31 @@ const Ipod = ({ appleAccessToken, spotifyCallbackCode }: Props) => {
       <GlobalStyles />
       <SettingsProvider>
         <ViewContextProvider>
-          <SpotifySDKProvider>
-            <MusicKitProvider token={appleAccessToken}>
-              <AudioPlayerProvider>
-                <SettingsContext.Consumer>
-                  {([{ deviceTheme }]) => (
-                    <Shell $deviceTheme={deviceTheme}>
-                      <Sticker $deviceTheme={deviceTheme} />
-                      <Sticker2 $deviceTheme={deviceTheme} />
-                      <Sticker3 $deviceTheme={deviceTheme} />
-                      <ScreenContainer>
-                        <ViewManager />
-                      </ScreenContainer>
-                      <ClickWheelContainer>
-                        <ClickWheel />
-                      </ClickWheelContainer>
-                    </Shell>
-                  )}
-                </SettingsContext.Consumer>
-              </AudioPlayerProvider>
-            </MusicKitProvider>
-          </SpotifySDKProvider>
+          <LocalMusicProvider>
+            <AudioPlayerProvider>
+                  <SettingsContext.Consumer>
+                    {([{ deviceTheme }]) => (
+                      <>
+                        <Shell $deviceTheme={deviceTheme}>
+                          <Sticker $deviceTheme={deviceTheme} />
+                          <Sticker2 $deviceTheme={deviceTheme} />
+                          <Sticker3 $deviceTheme={deviceTheme} />
+                          <ScreenContainer $deviceTheme={deviceTheme}>
+                            <ViewManager />
+                          </ScreenContainer>
+                          <ClickWheelContainer>
+                            <ClickWheel />
+                          </ClickWheelContainer>
+                          <CoverArtReflection />
+                        </Shell>
+                        <LyricsDisplay playlistMetadata={playlistMetadata} />
+                      </>
+                    )}
+                  </SettingsContext.Consumer>
+                </AudioPlayerProvider>
+          </LocalMusicProvider>
         </ViewContextProvider>
       </SettingsProvider>
-      <Script src="https://sdk.scdn.co/spotify-player.js" />
     </QueryClientProvider>
   );
 };

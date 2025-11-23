@@ -57,6 +57,7 @@ const useScrollHandler = (
   const timeoutIdRef = useRef<NodeJS.Timeout>();
   /** Only fire events on the top-most view. */
   const isActive = viewStack[viewStack.length - 1].id === id;
+  const wasActiveRef = useRef(isActive);
 
   /** Wait until the user stops scrolling to check for a new preview to display. */
   const handleCheckForPreview = useCallback(
@@ -222,6 +223,19 @@ const useScrollHandler = (
       setIndex(0);
     }
   }, [index, options.length]);
+
+  // When this view becomes active again (e.g. user backs out to menu/home and
+  // then re-enters Songs), ensure we always have a valid highlighted row.
+  useEffect(() => {
+    if (!options.length) return;
+
+    // Transition from inactive -> active
+    if (!wasActiveRef.current && isActive) {
+      setIndex((prev) => (prev > options.length - 1 ? 0 : prev));
+    }
+
+    wasActiveRef.current = isActive;
+  }, [isActive, options.length]);
 
   useEffectOnce(() => {
     if (!options || !options[0]) return;

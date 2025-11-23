@@ -132,4 +132,46 @@ const Mnelia: DeviceTheme = {
   },
 };
 
-export { Silver, Black, U2, Mnelia };
+// Birthday theme inspired by Mahitha's birthday website - Based on Black theme
+const Birthday: DeviceTheme = {
+  body: {
+    background: "linear-gradient(180deg, #7d7c7d 0%, #1e1e1e 100%)",
+    sticker1: {
+      background: "radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.03), transparent 50%)",
+      styles: {
+        bottom: "10%",
+        left: "5%",
+        height: "30%",
+        width: "40%",
+        borderRadius: "50%",
+        filter: "blur(20px)",
+        animation: "float1 8s ease-in-out infinite",
+      },
+    },
+    sticker2: {
+      background: "radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.02), transparent 50%)",
+      styles: {
+        top: "15%",
+        right: "8%",
+        height: "25%",
+        width: "35%",
+        borderRadius: "50%",
+        filter: "blur(15px)",
+        animation: "float2 10s ease-in-out infinite",
+      },
+    },
+
+  },
+  clickwheel: {
+    background: "#2a2a2a",
+    outline: "#1a1a1a",
+    button: "#FFFFFF",
+    centerButton: {
+      background: "#7d7c7d",
+      boxShadow: "rgb(50, 50, 50)",
+      outline: "#1a1a1a",
+    },
+  },
+};
+
+export { Silver, Black, U2, Mnelia, Birthday };

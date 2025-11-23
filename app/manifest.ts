@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "iPod.js",
     short_name: "iPod.js",
     description: "An iPod Classic built for the web.",
-    start_url: "/ipod",
+    start_url: "/",
     display: "standalone",
     theme_color: "#ffffff",
     background_color: "#ffffff",

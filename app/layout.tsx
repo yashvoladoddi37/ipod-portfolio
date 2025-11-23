@@ -3,16 +3,16 @@ import StyledComponentsRegistry from "lib/registry";
 import { Metadata, Viewport } from "next";
 import Script from "next/script";
 
-const appleTouchIconUrl = `${getRootAppUrl()}/ipod/apple-touch-icon.png`;
-const favicon32Url = `${getRootAppUrl()}/ipod/favicon-32x32.png`;
-const favicon16Url = `${getRootAppUrl()}/ipod/favicon-16x16.png`;
+const appleTouchIconUrl = `${getRootAppUrl()}/apple-touch-icon.png`;
+const favicon32Url = `${getRootAppUrl()}/favicon-32x32.png`;
+const favicon16Url = `${getRootAppUrl()}/favicon-16x16.png`;
 
 export const metadata: Metadata = {
   title: "iPod.js",
   description: "An iPod Classic built for the web.",
   metadataBase: new URL(getRootAppUrl()),
   openGraph: {
-    url: "http://tannerv.com/ipod",
+    url: getRootAppUrl(),
     title: "iPod.js",
     description: "An iPod Classic built for the web.",
     type: "website",

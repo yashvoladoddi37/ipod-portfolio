@@ -9,6 +9,7 @@ import {
   NowPlayingView,
   PlaylistsView,
   SearchView,
+  SongsView,
   viewConfigMap,
 } from "components/views";
 import {
@@ -17,52 +18,69 @@ import {
   useScrollHandler,
   useSettings,
 } from "hooks";
+import { playlistTracks } from "lib/playlistTracks";
 
 const MusicView = () => {
-  const { isAppleAuthorized } = useSettings();
+  const { isAppleAuthorized, service } = useSettings();
   const { nowPlayingItem } = useAudioPlayer();
   useMenuHideView(viewConfigMap.music.id);
 
   const options: SelectableListOption[] = useMemo(() => {
-    const arr: SelectableListOption[] = [
-      {
-        type: "view",
-        label: "Cover Flow",
-        viewId: viewConfigMap.coverFlow.id,
-        component: () => <CoverFlowView />,
-        preview: SplitScreenPreview.Music,
-      },
-      {
-        type: "view",
-        label: "Playlists",
-        viewId: viewConfigMap.playlists.id,
-        component: () => <PlaylistsView />,
-        preview: SplitScreenPreview.Music,
-      },
-      {
-        type: "view",
-        label: "Artists",
-        viewId: viewConfigMap.artists.id,
-        component: () => <ArtistsView />,
-        preview: SplitScreenPreview.Music,
-      },
-      {
-        type: "view",
-        label: "Albums",
-        viewId: viewConfigMap.albums.id,
-        component: () => <AlbumsView />,
-        preview: SplitScreenPreview.Music,
-      },
-      {
-        type: "view",
-        label: "Search",
-        viewId: viewConfigMap.search.id,
-        component: () => <SearchView />,
-        preview: SplitScreenPreview.Music,
-      },
-    ];
+    const arr: SelectableListOption[] = [];
 
-    if (isAppleAuthorized && !!nowPlayingItem) {
+    // Show local playlist for local music service
+    if (service === "local") {
+      arr.push({
+        type: "view",
+        label: "Mahitha's Birthday Playlist",
+        viewId: viewConfigMap.songs.id,
+        component: () => <SongsView songs={playlistTracks} />,
+        preview: SplitScreenPreview.Music,
+      });
+    }
+
+    // Add standard music options for other services (only if not local)
+    if (service !== "local") {
+      arr.push(
+        {
+          type: "view",
+          label: "Cover Flow",
+          viewId: viewConfigMap.coverFlow.id,
+          component: () => <CoverFlowView />,
+          preview: SplitScreenPreview.Music,
+        },
+        {
+          type: "view",
+          label: "Playlists",
+          viewId: viewConfigMap.playlists.id,
+          component: () => <PlaylistsView />,
+          preview: SplitScreenPreview.Music,
+        },
+        {
+          type: "view",
+          label: "Artists",
+          viewId: viewConfigMap.artists.id,
+          component: () => <ArtistsView />,
+          preview: SplitScreenPreview.Music,
+        },
+        {
+          type: "view",
+          label: "Albums",
+          viewId: viewConfigMap.albums.id,
+          component: () => <AlbumsView />,
+          preview: SplitScreenPreview.Music,
+        },
+        {
+          type: "view",
+          label: "Search",
+          viewId: viewConfigMap.search.id,
+          component: () => <SearchView />,
+          preview: SplitScreenPreview.Music,
+        }
+      );
+    }
+
+    if ((isAppleAuthorized || service === "local") && !!nowPlayingItem) {
       arr.push({
         type: "view",
         label: "Now playing",
@@ -73,7 +91,7 @@ const MusicView = () => {
     }
 
     return arr;
-  }, [isAppleAuthorized, nowPlayingItem]);
+  }, [isAppleAuthorized, service, nowPlayingItem]);
 
   const [scrollIndex] = useScrollHandler(viewConfigMap.music.id, options);
 

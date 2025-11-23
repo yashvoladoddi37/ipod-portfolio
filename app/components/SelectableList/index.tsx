@@ -91,6 +91,7 @@ export type SelectableListOption = SharedOptionProps &
 
 const Container = styled.div`
   width: 100%;
+  height: 100%;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 `;
@@ -150,11 +151,11 @@ const SelectableList = ({
       // Make sure the pagination loading indicator is in view.
       if (loadingNextItems) {
         children[activeIndex + 1]?.scrollIntoView({
-          block: "nearest",
+          block: "center",
         });
       } else {
         children[activeIndex]?.scrollIntoView({
-          block: "nearest",
+          block: "center",
         });
       }
     }

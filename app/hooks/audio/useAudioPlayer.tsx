@@ -10,6 +10,7 @@ import { useEventListener, useMKEventListener } from "hooks";
 import * as ConversionUtils from "utils/conversion";
 
 import { useMusicKit, useSettings, useSpotifySDK, VOLUME_KEY } from "..";
+import { useLocalMusic } from "providers/LocalMusicProvider";
 import { IpodEvent } from "utils/events";
 
 const defaultPlatbackInfoState = {
@@ -57,6 +58,7 @@ export const AudioPlayerProvider = ({ children }: Props) => {
   const { service, isSpotifyAuthorized, isAppleAuthorized } = useSettings();
   const { spotifyPlayer, accessToken, deviceId } = useSpotifySDK();
   const { music } = useMusicKit();
+  const localMusic = useLocalMusic();
   const [volume, setVolume] = useState(0.5);
   const [nowPlayingItem, setNowPlayingItem] = useState<MediaApi.MediaItem>();
   const [playbackInfo, setPlaybackInfo] = useState(defaultPlatbackInfoState);
@@ -143,6 +145,13 @@ export const AudioPlayerProvider = ({ children }: Props) => {
     [accessToken, deviceId, isSpotifyAuthorized, spotifyPlayer]
   );
 
+  const playLocal = useCallback(
+    async (queueOptions: MediaApi.QueueOptions) => {
+      await localMusic.play(queueOptions);
+    },
+    [localMusic]
+  );
+
   const play = useCallback(
     async (queueOptions: MediaApi.QueueOptions) => {
       switch (service) {
@@ -152,26 +161,31 @@ export const AudioPlayerProvider = ({ children }: Props) => {
         case "spotify":
           playSpotify(queueOptions);
           break;
+        case "local":
+          playLocal(queueOptions);
+          break;
         default:
           console.error("Unable to play: service not specified");
       }
     },
-    [playAppleMusic, playSpotify, service]
+    [playAppleMusic, playSpotify, playLocal, service]
   );
 
   const pause = useCallback(async () => {
     switch (service) {
       case "apple":
-        return spotifyPlayer.pause();
-      case "spotify":
         return music.pause();
+      case "spotify":
+        return spotifyPlayer.pause();
+      case "local":
+        return localMusic.pause();
       default:
-        throw new Error("Unable to play: service not specified");
+        throw new Error("Unable to pause: service not specified");
     }
-  }, [music, service, spotifyPlayer]);
+  }, [music, service, spotifyPlayer, localMusic]);
 
   const togglePlayPause = useCallback(async () => {
-    if (!hasNowPlayingItem) {
+    if (!hasNowPlayingItem && service !== "local") {
       return;
     }
 
@@ -188,13 +202,20 @@ export const AudioPlayerProvider = ({ children }: Props) => {
       case "spotify":
         spotifyPlayer.togglePlay?.();
         break;
+      case "local":
+        if (localMusic.isPlaying) {
+          await localMusic.pause();
+        } else {
+          await localMusic.resume();
+        }
+        break;
       default:
         throw new Error("Unable to play: service not specified");
     }
-  }, [hasNowPlayingItem, music, service, spotifyPlayer]);
+  }, [hasNowPlayingItem, music, service, spotifyPlayer, localMusic]);
 
   const skipNext = useCallback(async () => {
-    if (!nowPlayingItem) {
+    if (!nowPlayingItem && service !== "local") {
       return;
     }
 
@@ -213,18 +234,21 @@ export const AudioPlayerProvider = ({ children }: Props) => {
       case "spotify":
         await spotifyPlayer.nextTrack();
         break;
+      case "local":
+        await localMusic.skipNext();
+        break;
       default:
-        throw new Error("Unable to play: service not specified");
+        throw new Error("Unable to skip: service not specified");
     }
 
     setPlaybackInfo((prevState) => ({
       ...prevState,
       isLoading: false,
     }));
-  }, [music, nowPlayingItem, service, spotifyPlayer]);
+  }, [music, nowPlayingItem, service, spotifyPlayer, localMusic]);
 
   const skipPrevious = useCallback(async () => {
-    if (!nowPlayingItem) {
+    if (!nowPlayingItem && service !== "local") {
       return;
     }
 
@@ -243,15 +267,18 @@ export const AudioPlayerProvider = ({ children }: Props) => {
       case "spotify":
         await spotifyPlayer.previousTrack();
         break;
+      case "local":
+        await localMusic.skipPrevious();
+        break;
       default:
-        throw new Error("Unable to play: service not specified");
+        throw new Error("Unable to skip: service not specified");
     }
 
     setPlaybackInfo((prevState) => ({
       ...prevState,
       isLoading: false,
     }));
-  }, [music, nowPlayingItem, service, spotifyPlayer]);
+  }, [music, nowPlayingItem, service, spotifyPlayer, localMusic]);
 
   const updateNowPlayingItem = useCallback(async () => {
     let mediaItem: MediaApi.MediaItem | undefined;
@@ -268,10 +295,17 @@ export const AudioPlayerProvider = ({ children }: Props) => {
       if (state) {
         mediaItem = ConversionUtils.convertSpotifyMediaItem(state);
       }
+    } else if (service === "local" && localMusic.currentTrack) {
+      mediaItem = {
+        ...localMusic.currentTrack,
+        duration: localMusic.duration * 1000, // Convert to milliseconds
+        playlistName: "Mahitha's Birthday Playlist",
+        playlistArtworkUrl: localMusic.currentTrack.artwork?.url,
+      };
     }
 
     setNowPlayingItem(mediaItem);
-  }, [music, service, spotifyPlayer]);
+  }, [music, service, spotifyPlayer, localMusic]);
 
   const handleApplePlaybackStateChange = useCallback(
     ({ state }: { state: MusicKit.PlaybackStates }) => {
@@ -357,8 +391,37 @@ export const AudioPlayerProvider = ({ children }: Props) => {
         percent,
         duration: maxTime,
       }));
+    } else if (service === "local") {
+      const currentTime = localMusic.currentTime;
+      const duration = localMusic.duration;
+      const timeRemaining = duration - currentTime;
+      const percent = duration > 0 ? Math.round((currentTime / duration) * 100) : 0;
+
+      setPlaybackInfo((prevState) => ({
+        ...prevState,
+        currentTime,
+        timeRemaining,
+        percent,
+        duration,
+        isPlaying: localMusic.isPlaying,
+        isPaused: !localMusic.isPlaying,
+        isLoading: false,
+      }));
     }
-  }, [music, service, spotifyPlayer]);
+  }, [music, service, spotifyPlayer, localMusic]);
+
+  // When using the local service, immediately refresh Now Playing metadata
+  // and playback info whenever the underlying local track changes. This keeps
+  // the Now Playing screen (artwork/text) and seeker in sync with auto-advance
+  // and skipNext/skipPrevious actions, instead of waiting for the 1s interval.
+  const localCurrentTrack = localMusic.currentTrack;
+
+  useEffect(() => {
+    if (service === "local" && localCurrentTrack) {
+      updateNowPlayingItem();
+      updatePlaybackInfo();
+    }
+  }, [service, localCurrentTrack, updateNowPlayingItem, updatePlaybackInfo]);
 
   const seekToTime = useCallback(
     async (time: number) => {
@@ -368,11 +431,13 @@ export const AudioPlayerProvider = ({ children }: Props) => {
       } else if (service === "spotify") {
         // Seek to time (in ms)
         await spotifyPlayer.seek(time * 1000);
+      } else if (service === "local") {
+        localMusic.seekToTime(time);
       }
 
       updatePlaybackInfo();
     },
-    [music, service, spotifyPlayer, updatePlaybackInfo]
+    [music, service, spotifyPlayer, localMusic, updatePlaybackInfo]
   );
 
   const handleChangeVolume = useCallback(
@@ -386,11 +451,15 @@ export const AudioPlayerProvider = ({ children }: Props) => {
         (music as any).volume = newVolume;
       }
 
+      if (service === "local") {
+        localMusic.setVolume(newVolume);
+      }
+
       localStorage.setItem(VOLUME_KEY, `${newVolume}`);
 
       setVolume(newVolume);
     },
-    [isAppleAuthorized, isSpotifyAuthorized, music, spotifyPlayer]
+    [isAppleAuthorized, isSpotifyAuthorized, music, spotifyPlayer, service, localMusic]
   );
 
   useEventListener<IpodEvent>("playpauseclick", togglePlayPause);
@@ -431,6 +500,18 @@ export const AudioPlayerProvider = ({ children }: Props) => {
       handleChangeVolume(savedVolume);
     }
   }, [handleChangeVolume, isAppleAuthorized]);
+
+  // Update playback info for local music
+  useEffect(() => {
+    if (service === "local") {
+      const interval = setInterval(() => {
+        updatePlaybackInfo();
+        updateNowPlayingItem();
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [service, updatePlaybackInfo, updateNowPlayingItem]);
 
   return (
     <AudioPlayerContext.Provider

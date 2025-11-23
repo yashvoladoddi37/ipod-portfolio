@@ -45,18 +45,8 @@ const AboutView = () => {
   const options: SelectableListOption[] = [
     {
       type: "link",
-      label: "GitHub Repo",
-      url: "https://github.com/tvillarete/ipod-classic-js",
-    },
-    {
-      type: "link",
-      label: "My Website",
-      url: "http://tannerv.com",
-    },
-    {
-      type: "link",
-      label: "LinkedIn",
-      url: "https://linkedin.com/in/tvillarete",
+      label: "my pinterest",
+      url: "https://in.pinterest.com/mahithamans/",
     },
   ];
 
@@ -69,13 +59,7 @@ const AboutView = () => {
           <Image alt="iPod" src={`${APP_URL}/ipod_logo.svg`} />
           <Title>iPod.js</Title>
         </TitleContainer>
-        <Description>
-          Made with{" "}
-          <span aria-label="heart" role="img">
-            ❤️
-          </span>{" "}
-          by Tanner Villarete
-        </Description>
+        <Description></Description>
         <SelectableList options={options} activeIndex={scrollIndex} />
       </ListContainer>
     </Container>

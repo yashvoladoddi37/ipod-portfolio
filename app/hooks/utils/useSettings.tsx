@@ -9,7 +9,7 @@ import { ColorScheme } from "utils/colorScheme";
 import { SELECTED_SERVICE_KEY } from "utils/service";
 import { DeviceThemeName } from "utils/themes";
 
-type StreamingService = "apple" | "spotify";
+type StreamingService = "apple" | "spotify" | "local";
 
 export const VOLUME_KEY = "ipodVolume";
 export const COLOR_SCHEME_KEY = "ipodColorScheme";
@@ -127,9 +127,9 @@ export const SettingsProvider = ({ children }: Props) => {
   const [settingsState, setSettingsState] = useState<SettingsState>({
     isAppleAuthorized: false,
     isSpotifyAuthorized: false,
-    service: undefined,
+    service: "local",
     colorScheme: "default",
-    deviceTheme: "silver",
+    deviceTheme: "birthday",
   });
 
   const handleMount = useCallback(() => {
@@ -137,11 +137,10 @@ export const SettingsProvider = ({ children }: Props) => {
       ...prevState,
       service:
         (localStorage.getItem(SELECTED_SERVICE_KEY) as StreamingService) ??
-        undefined,
+        "local",
       colorScheme:
         (localStorage.getItem(COLOR_SCHEME_KEY) as ColorScheme) ?? "default",
-      deviceTheme:
-        (localStorage.getItem(DEVICE_COLOR_KEY) as DeviceThemeName) ?? "silver",
+      deviceTheme: "birthday", // Force birthday theme
     }));
   }, []);
 

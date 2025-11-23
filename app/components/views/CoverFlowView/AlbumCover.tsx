@@ -123,7 +123,14 @@ const AlbumCover = ({
       $activeIndex={activeIndex}
       $isPlaying={isSelected && playingAlbum}
     >
-      <Artwork src={Utils.getArtwork(300, album.artwork?.url)} />
+      <Artwork
+        src={Utils.encodeImageUrl(Utils.getArtwork(300, album.artwork?.url))}
+        onError={(e) => {
+          console.log('Album cover failed to load:', album.name);
+          e.currentTarget.src = Utils.getArtwork(300, undefined);
+        }}
+        alt={album.name}
+      />
       <AnimatePresence>
         {isSelected && !playingAlbum && (
           <Backside {...fadeScale}>
