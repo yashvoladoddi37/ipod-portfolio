@@ -29,7 +29,7 @@ const ContentTransitionContainer = styled.div<ContentTransitionContainerProps>`
   height: 100%;
   transition: transform 0.3s;
   transform: ${(props) => props.$isHidden && "translateX(-100%)"};
-  overflow: auto;
+  overflow: hidden;
 `;
 
 interface Props {

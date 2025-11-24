@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type Dispatch, type SetStateAction } from "react";
 
 import {
   ActionSheetOptionProps,
@@ -49,7 +49,7 @@ const useScrollHandler = (
    * Useful for fetching the next page of data before the user reaches the end of the list.
    */
   onNearEndOfList?: (...args: any) => any
-): [number] => {
+): [number, Dispatch<SetStateAction<number>>] => {
   const { triggerHaptics } = useHapticFeedback();
   const { showView, viewStack, setPreview } = useViewContext();
   const { play } = useAudioPlayer();
@@ -251,7 +251,9 @@ const useScrollHandler = (
   useEventListener<IpodEvent>("forwardscroll", handleForwardScroll);
   useEventListener<IpodEvent>("backwardscroll", handleBackwardScroll);
 
-  return [index];
+// At the end of the hook, expose setIndex
+  return [index, setIndex] as const;
+
 };
 
 export default useScrollHandler;

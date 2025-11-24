@@ -35,7 +35,7 @@ const SongsView = ({ songs }: Props) => {
     <SelectableList
       options={options}
       activeIndex={scrollIndex}
-      emptyMessage="No songs to show"
+      emptyMessage="No songs"
     />
   );
 };

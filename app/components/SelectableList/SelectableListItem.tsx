@@ -41,7 +41,6 @@ const Sublabel = styled.h3`
 const Container = styled.div<{ $isActive?: boolean }>`
   display: flex;
   align-items: center;
-  overflow: auto;
 
   ${(props) =>
     props.$isActive &&

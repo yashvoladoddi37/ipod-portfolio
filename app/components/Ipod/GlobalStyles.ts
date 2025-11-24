@@ -10,6 +10,8 @@ export const GlobalStyles = createGlobalStyle`
     display: grid;
     place-items: center;
     margin: 0;
+    padding-bottom: 280px;
+    box-sizing: border-box;
     font-family: 'FK Grotesk', 'Ranade', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     color: #e0e0e0;

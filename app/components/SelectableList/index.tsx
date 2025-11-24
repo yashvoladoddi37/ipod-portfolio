@@ -92,8 +92,17 @@ export type SelectableListOption = SharedOptionProps &
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 `;
 
 const LoadingContainer = styled(motion.div)`
@@ -142,25 +151,30 @@ const SelectableList = ({
 
   /** Always make sure the selected item is within the screen's view. */
   useEffect(() => {
-    // Delay "isMounted" so that the enter animation doesn't get interrupted.
-    if (isMounted && containerRef.current && fullOptions.length) {
+    if (containerRef.current && fullOptions.length) {
       const container = containerRef.current;
       const { children } = container;
-      const targetIndex = loadingNextItems ? activeIndex + 1 : activeIndex;
+      // The loading indicator is appended to the end of the list, so the index matches.
+      const targetIndex = activeIndex;
       const targetElement = children[targetIndex] as HTMLElement;
 
       if (targetElement) {
-        // Calculate the scroll position to keep the element centered
-        const elementTop = targetElement.offsetTop;
-        const elementHeight = targetElement.offsetHeight;
         const containerHeight = container.clientHeight;
-        const scrollPosition = elementTop - (containerHeight / 2) + (elementHeight / 2);
-        
-        // Use direct scrollTop assignment for immediate effect
-        container.scrollTop = Math.max(0, scrollPosition);
+        const containerScrollTop = container.scrollTop;
+        const targetOffsetTop = targetElement.offsetTop;
+        const targetHeight = targetElement.clientHeight;
+
+        // Scroll down if the item is below the view
+        if (targetOffsetTop + targetHeight > containerScrollTop + containerHeight) {
+          container.scrollTop = targetOffsetTop + targetHeight - containerHeight;
+        }
+        // Scroll up if the item is above the view
+        else if (targetOffsetTop < containerScrollTop) {
+          container.scrollTop = targetOffsetTop;
+        }
       }
     }
-  }, [activeIndex, isMounted, fullOptions.length, loadingNextItems]);
+  }, [activeIndex, fullOptions.length]);
 
   return (
     <AnimatePresence>

@@ -2,7 +2,6 @@ import { createContext, useCallback, useContext, useRef, useState, useEffect, us
 import { useSettings } from "hooks";
 import { playlistTracks } from "lib/playlistTracks";
 import { encodeImageUrl } from "utils";
-import { MediaApi } from "utils/types";
 
 export interface LocalMusicState {
   isReady: boolean;
@@ -149,7 +148,7 @@ export const LocalMusicProvider = ({ children }: Props) => {
       audio.removeEventListener('loadstart', handleLoadStart);
       audio.pause();
     };
-  }, []);
+  }, [setService]);
 
   // Update audio source when track changes
   useEffect(() => {
