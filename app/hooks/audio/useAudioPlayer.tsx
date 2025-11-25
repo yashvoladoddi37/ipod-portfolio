@@ -309,22 +309,24 @@ export const AudioPlayerProvider = ({ children }: Props) => {
   }, [music, service, spotifyPlayer, localMusic]);
 
   const handleApplePlaybackStateChange = useCallback(
-    ({ state }: { state: MusicKit.PlaybackStates }) => {
+    ({ state }: { state: any }) => {
       let isLoading = false;
       let isPlaying = false;
       let isPaused = false;
 
       switch (state) {
-        case MusicKit.PlaybackStates.playing:
+        case "playing":
           isPlaying = true;
           break;
-        case MusicKit.PlaybackStates.paused:
+        case "paused":
           isPaused = true;
           break;
-        case MusicKit.PlaybackStates.loading:
-        case MusicKit.PlaybackStates.waiting:
-        case MusicKit.PlaybackStates.stalled:
+        case "loading":
+        case "waiting":
+        case "stalled":
           isLoading = true;
+          break;
+        default:
           break;
       }
 
