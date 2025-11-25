@@ -11,10 +11,10 @@ export default async function Page({
   const appleAccessToken = APPLE_DEVELOPER_TOKEN ?? "";
   const spotifyCode = searchParams.code;
 
-  // Load playlist metadata
+  // Load playlist metadata from a JSON file bundled with this app
   let playlistMetadata = [];
   try {
-    const metadataPath = path.join(process.cwd(), '..', 'playlist-metadata.json');
+    const metadataPath = path.join(process.cwd(), 'playlist-metadata.json');
     const metadataContent = fs.readFileSync(metadataPath, 'utf8');
     playlistMetadata = JSON.parse(metadataContent);
   } catch (error) {
