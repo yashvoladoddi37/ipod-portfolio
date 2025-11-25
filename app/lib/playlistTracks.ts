@@ -59,11 +59,11 @@ export const localTracks: LocalTrack[] = [
     cover: "https://od.lk/s/ODhfMTkzNTc5Mzhf/Don%20Toliver%2C%20Travis%20Scott%20-%20You%20%28feat.%20Travis%20Scott%29.jpg",
   },
   {
-    id: "1yeB8MUNeLo9Ek1UEpsyz6",
-    title: "Rich Baby Daddy (feat. Sexyy Red & SZA)",
-    artist: "Drake, Sexyy Red, SZA",
-    src: "https://od.lk/s/ODhfMTkzNTcyMDBf/Drake%2C%20Sexyy%20Red%2C%20SZA%20-%20Rich%20Baby%20Daddy%20%28feat.%20Sexyy%20Red%20%26%20SZA%29.mp3",
-    cover: "https://od.lk/s/ODhfMTkzNTc5NDBf/Drake%2C%20Sexyy%20Red%2C%20SZA%20-%20Rich%20Baby%20Daddy%20%28feat.%20Sexyy%20Red%20%26%20SZA%29.jpg",
+    id: "PLAYBOI_CARTI_CONTROL",
+    title: "Control",
+    artist: "Playboi Carti",
+    src: "https://od.lk/s/ODhfMTkzNjYxNjRf/Playboi%20Carti%20-%20Control.mp3",
+    cover: "https://od.lk/s/ODhfMTkzNjYxNjJf/Playboi%20Carti%20-%20Control.jpeg",
   },
   {
     id: "0O3TAouZE4vL9dM5SyxgvH",
@@ -108,11 +108,11 @@ export const localTracks: LocalTrack[] = [
     cover: "https://od.lk/s/ODhfMTkzNTc5NDFf/PARTYNEXTDOOR%2C%20Drake%20-%20LASERS.jpg",
   },
   {
-    id: "PLAYBOI_CARTI_CONTROL",
-    title: "Control",
-    artist: "Playboi Carti",
-    src: "https://od.lk/s/ODhfMTkzNjYxNjRf/Playboi%20Carti%20-%20Control.mp3",
-    cover: "https://od.lk/s/ODhfMTkzNjYxNjJf/Playboi%20Carti%20-%20Control.jpeg",
+    id: "1yeB8MUNeLo9Ek1UEpsyz6",
+    title: "Rich Baby Daddy (feat. Sexyy Red & SZA)",
+    artist: "Drake, Sexyy Red, SZA",
+    src: "https://od.lk/s/ODhfMTkzNTcyMDBf/Drake%2C%20Sexyy%20Red%2C%20SZA%20-%20Rich%20Baby%20Daddy%20%28feat.%20Sexyy%20Red%20%26%20SZA%29.mp3",
+    cover: "https://od.lk/s/ODhfMTkzNTc5NDBf/Drake%2C%20Sexyy%20Red%2C%20SZA%20-%20Rich%20Baby%20Daddy%20%28feat.%20Sexyy%20Red%20%26%20SZA%29.jpg",
   },
   {
     id: "3Q5cLvkKsHJvYltf8k7HkO",
