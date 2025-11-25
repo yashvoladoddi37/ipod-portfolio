@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import * as Utils from "utils";
 
 import BacksideContent from "./BacksideContent";
-import { Point } from "./CoverFlow";
+import { Point, type AlbumPreview } from "./CoverFlow";
 
 const getOffsetPx = (offset: number, midpoint: number) => {
   if (offset === 0) return 0;
@@ -92,7 +92,7 @@ interface Props {
   index: number;
   activeIndex: number;
   midpoint: Point;
-  album: MediaApi.Album;
+  album: AlbumPreview;
   isSelected: boolean;
   playingAlbum: boolean;
   setPlayingAlbum: (val: boolean) => void;

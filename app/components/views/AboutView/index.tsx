@@ -42,7 +42,7 @@ const AboutView = () => {
     },
     {
       type: "link",
-      label: "this may interest you based on where you're going",
+      label: "this may be of your interest for the next few years",
       sublabel: "connect your Pinterest and find secondhand pieces from your saved outfits – live in the UK, not in India yet",
       url: "https://www.shoprecove.com/",
     },

@@ -84,7 +84,7 @@ const COVER_MESSAGES: Record<string, string> = {
 
   // you da baddest
   "4AFgK4wP1iD5i8BYaLr9Vf":
-    "you really are da baddest, even when you forget it for a minute",
+    "you really are da baddest, even if you forget it for a minute",
 };
 
 const DEFAULT_MESSAGE = "";

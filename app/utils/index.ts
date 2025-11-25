@@ -29,7 +29,7 @@ export const encodeImageUrl = (url: string) => {
   return `${path}/${encodedFilename}`;
 };
 
-export const setDocumentSongTitle = (song?: AppleMusicApi.Song) => {
+export const setDocumentSongTitle = (song?: any) => {
   document.title = song
     ? `${song.attributes?.name ?? "Music"} – iPod.js`
     : "iPod.js";

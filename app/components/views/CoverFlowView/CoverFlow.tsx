@@ -14,6 +14,8 @@ export type Point = {
   y: number;
 };
 
+export type AlbumPreview = Pick<MediaApi.Album, "id" | "name" | "artistName" | "artwork">;
+
 const Container = styled.div`
   height: 100%;
 `;
@@ -75,14 +77,14 @@ const ArtistText = styled(BaseText)`
 `;
 
 interface Props {
-  albums: MediaApi.Album[];
+  albums: AlbumPreview[];
 }
 
 const CoverFlow = ({ albums }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [midpoint, setMidpoint] = useState<Point>({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-  const [selectedAlbum, setSelectedAlbum] = useState<MediaApi.Album>();
+  const [selectedAlbum, setSelectedAlbum] = useState<AlbumPreview>();
   const [playingAlbum, setPlayingAlbum] = useState(false);
   const { hideView, setHeaderTitle } = useViewContext();
 

@@ -3,7 +3,7 @@ import React, { useCallback, useMemo } from "react";
 import { useEventListener, useViewContext } from "hooks";
 import styled from "styled-components";
 
-import CoverFlow from "./CoverFlow";
+import CoverFlow, { AlbumPreview } from "./CoverFlow";
 import { IpodEvent } from "utils/events";
 import { playlistTracks } from "lib/playlistTracks";
 
@@ -14,7 +14,7 @@ const Container = styled.div`
 
 const CoverFlowView = () => {
   const { hideView } = useViewContext();
-  const albums = useMemo<MediaApi.Album[]>(
+  const albums = useMemo<AlbumPreview[]>(
     () =>
       playlistTracks.map((track) => ({
         id: track.id,

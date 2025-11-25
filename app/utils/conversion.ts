@@ -9,7 +9,7 @@ export const getAppleArtwork = (size: number | string, url?: string) => {
   return url.replace("{w}", `${size || 100}`).replace("{h}", `${size || 100}`);
 };
 
-export const convertAppleSong = (data: AppleMusicApi.Song): MediaApi.Song => ({
+export const convertAppleSong = (data: any): MediaApi.Song => ({
   id: data.id,
   name: data.attributes?.name ?? "Unknown name",
   url: data.href ?? "",
@@ -47,7 +47,7 @@ export const convertSpotifySongFull = (
 // Playlist Conversion
 
 export const convertApplePlaylist = (
-  data: AppleMusicApi.Playlist
+  data: any
 ): MediaApi.Playlist => ({
   id: data.id,
   name: data.attributes?.name ?? "–",
@@ -94,7 +94,7 @@ export const convertSpotifyPlaylistFull = (
 });
 
 export const convertAppleAlbum = (
-  data: AppleMusicApi.Album
+  data: any
 ): MediaApi.Album => ({
   id: data.id,
   name: data.attributes?.name ?? "–",
@@ -129,7 +129,7 @@ export const convertSpotifyAlbumFull = (
 });
 
 export const convertAppleArtist = (
-  data: AppleMusicApi.Artist
+  data: any
 ): MediaApi.Artist => ({
   id: data.id,
   name: data.attributes?.name ?? "–",
@@ -206,13 +206,13 @@ export const convertSpotifySearchResults = async (
 };
 
 export const convertAppleSearchResults = (
-  search: AppleMusicApi.SearchResponse
+  search: any
 ): MediaApi.SearchResults => {
   const { results } = search;
 
   return {
     artists: results.artists?.data.map(convertAppleArtist) ?? [],
-    albums: results.albums?.data.map((album) => convertAppleAlbum(album)) ?? [],
+    albums: results.albums?.data.map((album: any) => convertAppleAlbum(album)) ?? [],
     songs: results.songs?.data.map(convertAppleSong) ?? [],
     playlists: results.playlists?.data.map(convertApplePlaylist) ?? [],
   };

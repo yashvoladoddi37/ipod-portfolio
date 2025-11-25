@@ -16,13 +16,13 @@ export const useMusicKit = () => ({
 });
 
 export const useMKDataFetcher = () => ({
-  fetchAlbum: async () => null,
-  fetchAlbums: async () => null,
-  fetchArtists: async () => null,
-  fetchArtistAlbums: async () => null,
-  fetchPlaylists: async () => null,
-  fetchPlaylist: async () => null,
-  fetchSearchResults: async () => null,
+  fetchAlbum: async (..._args: any[]) => null,
+  fetchAlbums: async (..._args: any[]) => null,
+  fetchArtists: async (..._args: any[]) => null,
+  fetchArtistAlbums: async (..._args: any[]) => null,
+  fetchPlaylists: async (..._args: any[]) => null,
+  fetchPlaylist: async (..._args: any[]) => null,
+  fetchSearchResults: async (..._args: any[]) => null,
 });
 
 export const useMKEventListener = (_event: string, _handler: any) => {
