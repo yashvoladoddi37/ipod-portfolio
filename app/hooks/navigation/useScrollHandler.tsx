@@ -56,7 +56,8 @@ const useScrollHandler = (
   const [index, setIndex] = useState(getInitIndex(options, selectedOption));
   const timeoutIdRef = useRef<NodeJS.Timeout>();
   /** Only fire events on the top-most view. */
-  const isActive = viewStack[viewStack.length - 1].id === id;
+  const currentView = viewStack[viewStack.length - 1];
+  const isActive = currentView?.id === id;
   const wasActiveRef = useRef(isActive);
 
   /** Wait until the user stops scrolling to check for a new preview to display. */

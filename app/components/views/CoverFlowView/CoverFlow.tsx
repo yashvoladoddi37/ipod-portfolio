@@ -101,10 +101,10 @@ const CoverFlow = ({ albums }: Props) => {
   const handleMenuClick = useCallback(() => {
     if (selectedAlbum && playingAlbum) {
       setPlayingAlbum(false);
-      setHeaderTitle("Cover Flow");
+      setHeaderTitle("Message Cards");
     } else if (selectedAlbum) {
       setSelectedAlbum(undefined);
-      setHeaderTitle("Cover Flow");
+      setHeaderTitle("Message Cards");
     } else {
       hideView();
     }

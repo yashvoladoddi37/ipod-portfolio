@@ -128,7 +128,7 @@ export const viewConfigMap: Record<string, ViewConfig> = {
   // CoverFlow view
   coverFlow: {
     id: "coverFlow",
-    title: "Cover Flow",
+    title: "Message Cards",
     type: "coverFlow",
     preview: SplitScreenPreview.Music,
   },

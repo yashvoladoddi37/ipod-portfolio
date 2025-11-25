@@ -44,7 +44,7 @@ const MusicView = () => {
       arr.push(
         {
           type: "view",
-          label: "Cover Flow",
+          label: "Message Cards",
           viewId: viewConfigMap.coverFlow.id,
           component: () => <CoverFlowView />,
           preview: SplitScreenPreview.Music,
