@@ -94,9 +94,9 @@ const NowPlaying = ({ hideArtwork, onHide }: Props) => {
     useAudioPlayer();
 
   const handlePlaybackChange = useCallback(
-    ({ state }: { state: MusicKit.PlaybackStates }) => {
+    ({ state }: { state: any }) => {
       /** Hide the now playing view if the playback state is "Completed" */
-      if (state === MusicKit.PlaybackStates.completed) {
+      if (state === "completed") {
         onHide();
       }
     },
