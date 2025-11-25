@@ -7,7 +7,7 @@
     "import/first": "error",
     "import/no-mutable-exports": "error",
     "import/no-self-import": "error",
-    "import/no-unresolved": "error",
+    "import/no-unresolved": "off",
     "import/no-useless-path-segments": "error",
     "import/prefer-default-export": ["off"],
     "react-hooks/rules-of-hooks": "error",

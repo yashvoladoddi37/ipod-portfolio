@@ -53,10 +53,13 @@ const Header = () => {
 
   const { isPlaying, isPaused, isLoading } = playbackInfo;
   const isBirthdayTheme = deviceTheme === 'birthday';
+  // Fallback: if for any reason headerTitle is missing, default back to the
+  // home label so the header never renders as an empty bar.
+  const effectiveTitle = headerTitle ?? "M's iPod";
 
-  return headerTitle ? (
+  return (
     <Container $isBirthdayTheme={isBirthdayTheme}>
-      <Text $isBirthdayTheme={isBirthdayTheme}>{headerTitle}</Text>
+      <Text $isBirthdayTheme={isBirthdayTheme}>{effectiveTitle}</Text>
       <IconContainer>
         {isLoading && (
           <IconContainer>
@@ -68,7 +71,7 @@ const Header = () => {
         <StyledBatteryIndicator />
       </IconContainer>
     </Container>
-  ) : null;
+  );
 };
 
 export default Header;

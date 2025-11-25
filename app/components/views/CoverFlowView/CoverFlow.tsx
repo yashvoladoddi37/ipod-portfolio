@@ -61,6 +61,7 @@ const BaseText = styled.h3`
   font-size: 16px;
   text-align: center;
   padding: 0 16px;
+  color: #111;
 `;
 
 const TitleText = styled(BaseText)`
@@ -73,7 +74,7 @@ const TitleText = styled(BaseText)`
 
 const ArtistText = styled(BaseText)`
   font-weight: 400;
-  opacity: 0.85;
+  opacity: 0.95;
 `;
 
 interface Props {

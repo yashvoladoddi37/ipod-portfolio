@@ -1,10 +1,9 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 
-import { useEventListener, useViewContext } from "hooks";
+import { useViewContext } from "hooks";
 import styled from "styled-components";
 
 import CoverFlow, { AlbumPreview } from "./CoverFlow";
-import { IpodEvent } from "utils/events";
 import { playlistTracks } from "lib/playlistTracks";
 
 const Container = styled.div`
@@ -24,12 +23,6 @@ const CoverFlowView = () => {
       })),
     []
   );
-
-  const handleMenuClick = useCallback(() => {
-    hideView();
-  }, [hideView]);
-
-  useEventListener<IpodEvent>("menuclick", handleMenuClick);
 
   return (
     <Container>
