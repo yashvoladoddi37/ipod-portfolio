@@ -158,7 +158,7 @@ export const convertSpotifyArtistFull = (
 });
 
 export const convertAppleMediaItem = (
-  mediaItem: MusicKit.MediaItem
+  mediaItem: any
 ): MediaApi.MediaItem => ({
   albumName: mediaItem.albumName,
   artistName: mediaItem.artistName,
