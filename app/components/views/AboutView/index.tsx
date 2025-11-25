@@ -3,37 +3,24 @@ import { viewConfigMap } from "components/views";
 import { useMenuHideView, useScrollHandler } from "hooks";
 import styled from "styled-components";
 import { Unit } from "utils/constants";
-import { APP_URL } from "utils/constants/api";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const Image = styled.img`
-  height: ${Unit.XL};
-  width: auto;
-  margin: ${Unit.XS};
-`;
-
 const TitleContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: ${Unit.MD} ${Unit.MD} 0;
+  padding: ${Unit.LG} ${Unit.MD} ${Unit.SM};
+  margin-bottom: ${Unit.SM};
 `;
 
 const Title = styled.h3`
   margin: 0;
   font-size: 16px;
   font-weight: 900;
-`;
-
-const Description = styled.h3`
-  margin: 0 0 ${Unit.MD};
-  font-size: 14px;
-  font-weight: normal;
-  text-align: center;
 `;
 
 const ListContainer = styled.div`
@@ -48,6 +35,17 @@ const AboutView = () => {
       label: "my pinterest",
       url: "https://in.pinterest.com/mahithamans/",
     },
+    {
+      type: "link",
+      label: "the playlist on spotify",
+      url: "https://open.spotify.com/playlist/5d7xgGIsWMEh55d3UlHeN1?si=a6aa39a660be4bc0",
+    },
+    {
+      type: "link",
+      label: "this may interest you based on where you're going",
+      sublabel: "connect your Pinterest and find secondhand pieces from your saved outfits – live in the UK, not in India yet",
+      url: "https://www.shoprecove.com/",
+    },
   ];
 
   const [scrollIndex] = useScrollHandler(viewConfigMap.about.id, options);
@@ -56,10 +54,8 @@ const AboutView = () => {
     <Container>
       <ListContainer>
         <TitleContainer>
-          <Image alt="iPod" src={`${APP_URL}/ipod_logo.svg`} />
-          <Title>iPod.js</Title>
+          <Title>mahitha's birthday ipod</Title>
         </TitleContainer>
-        <Description></Description>
         <SelectableList options={options} activeIndex={scrollIndex} />
       </ListContainer>
     </Container>

@@ -34,7 +34,7 @@ export type ViewConfig = {
 
 export const viewConfigMap: Record<string, ViewConfig> = {
   // Split Screen Views
-  home: { id: "home", title: "iPod.js", type: "screen", isSplitScreen: true },
+  home: { id: "home", title: "M's iPod", type: "screen", isSplitScreen: true },
   music: {
     id: "music",
     title: "Music",

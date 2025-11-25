@@ -18,8 +18,6 @@ import {
   useAudioPlayer,
   useEventListener,
   useScrollHandler,
-  useSettings,
-  useSpotifySDK,
   useViewContext,
 } from "hooks";
 import { IpodEvent } from "utils/events";
@@ -29,9 +27,7 @@ const strings = {
 };
 
 const HomeView = () => {
-  const { isAuthorized } = useSettings();
   const { nowPlayingItem } = useAudioPlayer();
-  const { signIn: signInWithSpotify } = useSpotifySDK();
   const { showView, viewStack } = useViewContext();
 
   const options: SelectableListOption[] = useMemo(
@@ -64,13 +60,6 @@ const HomeView = () => {
         component: () => <SettingsView />,
         preview: SplitScreenPreview.Settings,
       },
-      // Show the sign in button if the user is not logged in.
-      ...getConditionalOption(!isAuthorized, {
-        type: "action",
-        label: "Sign in with Spotify",
-        onSelect: signInWithSpotify,
-        preview: SplitScreenPreview.Music,
-      }),
       ...getConditionalOption(!!nowPlayingItem, {
         type: "view",
         label: strings.nowPlaying,
@@ -79,7 +68,7 @@ const HomeView = () => {
         preview: SplitScreenPreview.NowPlaying,
       }),
     ],
-    [isAuthorized, nowPlayingItem, signInWithSpotify]
+    [nowPlayingItem]
   );
 
   const [scrollIndex] = useScrollHandler(viewConfigMap.home.id, options);

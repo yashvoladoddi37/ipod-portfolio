@@ -36,6 +36,10 @@ const Artwork = styled.img`
   width: 100%;
   transform: rotateY(18deg);
   border: 1px solid #f3f3f3;
+  border-radius: 4px;
+  box-shadow:
+    0 10px 18px rgba(0, 0, 0, 0.22),
+    0 0 24px rgba(255, 255, 255, 0.65);
 
   &[src=""], &:not([src]) {
     background: linear-gradient(135deg, #333 0%, #555 100%);

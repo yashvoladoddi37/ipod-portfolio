@@ -54,15 +54,24 @@ const NowPlayingContainer = styled(motion.div)`
   right: 0;
 `;
 
-const Text = styled.h3`
+const BaseText = styled.h3`
   margin: 0;
   font-size: 16px;
   text-align: center;
   padding: 0 16px;
+`;
+
+const TitleText = styled(BaseText)`
+  font-weight: 700;
 
   :first-of-type {
     margin-top: 24px;
   }
+`;
+
+const ArtistText = styled(BaseText)`
+  font-weight: 400;
+  opacity: 0.85;
 `;
 
 interface Props {
@@ -78,10 +87,15 @@ const CoverFlow = ({ albums }: Props) => {
   const { hideView, setHeaderTitle } = useViewContext();
 
   const selectAlbum = useCallback(() => {
-    if (!selectedAlbum) {
-      const album = albums[activeIndex];
-      setSelectedAlbum(album);
+    // first click: select the current album and show the message
+    // second click: clear selection so the cover rotates back in place
+    if (selectedAlbum) {
+      setSelectedAlbum(undefined);
+      return;
     }
+
+    const album = albums[activeIndex];
+    setSelectedAlbum(album);
   }, [activeIndex, albums, selectedAlbum]);
 
   const handleMenuClick = useCallback(() => {
@@ -142,8 +156,8 @@ const CoverFlow = ({ albums }: Props) => {
       <AnimatePresence>
         {albums.length && !playingAlbum && (
           <InfoContainer {...fade}>
-            <Text>{albums[activeIndex]?.name}</Text>
-            <Text>{albums[activeIndex]?.artistName}</Text>
+            <TitleText>{albums[activeIndex]?.name}</TitleText>
+            <ArtistText>{albums[activeIndex]?.artistName}</ArtistText>
           </InfoContainer>
         )}
         {playingAlbum && (

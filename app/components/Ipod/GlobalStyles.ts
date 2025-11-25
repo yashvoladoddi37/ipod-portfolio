@@ -5,41 +5,28 @@ export const GlobalStyles = createGlobalStyle`
   @import url('/styles/fonts.css');
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap');
 
+  html {
+    background: transparent;
+  }
+
   body {
     height: 100dvh;
     display: grid;
     place-items: center;
     margin: 0;
-    padding-bottom: 280px;
+    padding: 0;
     box-sizing: border-box;
     font-family: 'FK Grotesk', 'Ranade', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     color: #e0e0e0;
-    background: #0a0a0a;
+    background: transparent;
     min-height: 550px;
-    overflow: auto;
+    overflow: hidden;
     font-weight: 300;
     letter-spacing: 0.02em;
     position: relative;
-
-    /* Add grainy texture overlay */
-    &::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 120%;
-      height: 120%;
-      background-image:
-        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.01) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.005) 0%, transparent 50%);
-      background-size: 200px 200px, 300px 300px, 150px 150px;
-      animation: grain 20s steps(10) infinite;
-      pointer-events: none;
-      z-index: -1;
-      opacity: 0.3;
-    }
+    background: none !important;
+    background-color: transparent !important;
 
     ${Screen.XS.MediaQuery} {
       min-height: 480px;
@@ -55,15 +42,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  @media (prefers-color-scheme: dark) {
-    html {
-      color-scheme: dark;
-    }
-    body {
-      background: #0a0a0a;
-      color: #e0e0e0;
-    }
-  }
+
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Ranade', 'FK Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;

@@ -134,10 +134,7 @@ const AlbumCover = ({
       <AnimatePresence>
         {isSelected && !playingAlbum && (
           <Backside {...fadeScale}>
-            <BacksideContent
-              albumId={album.id}
-              setPlayingAlbum={setPlayingAlbum}
-            />
+            <BacksideContent albumId={album.id} />
           </Backside>
         )}
       </AnimatePresence>

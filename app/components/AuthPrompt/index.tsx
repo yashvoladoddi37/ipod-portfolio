@@ -52,53 +52,13 @@ const Text = styled.p`
   color: rgb(100, 100, 100);
 `;
 
-const strings = {
-  title: {
-    apple: "Apple Music",
-    spotify: "Spotify",
-  },
-  defaultMessage: "Sign into view this content",
-};
-
 interface Props {
   message?: string;
 }
 
 const AuthPrompt = ({ message }: Props) => {
-  const { isConfigured: isMkConfigured } = useMusicKit();
-  const [icon, setIcon] = useState<"apple" | "spotify">(
-    isMkConfigured ? "apple" : "spotify"
-  );
-
-  useInterval(() => {
-    setIcon((prevState) => {
-      if (prevState === "apple" || !isMkConfigured) {
-        return "spotify";
-      }
-
-      return "apple";
-    });
-  }, 4000);
-
   return (
-    <RootContainer>
-      <ImageContainer>
-        {isMkConfigured && (
-          <StyledImg
-            $isHidden={icon === "spotify"}
-            alt="app_icon"
-            src={`${APP_URL}/apple_music_icon.svg`}
-          />
-        )}
-        <StyledImg
-          $isHidden={icon === "apple"}
-          alt="app_icon"
-          src={`${APP_URL}/spotify_icon.svg`}
-        />
-      </ImageContainer>
-      <Title>{strings.title[icon]}</Title>
-      <Text>{message ?? strings.defaultMessage}</Text>
-    </RootContainer>
+    <RootContainer />
   );
 };
 

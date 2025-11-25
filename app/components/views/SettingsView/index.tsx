@@ -12,19 +12,14 @@ import {
   useMusicKit,
   useScrollHandler,
   useSettings,
-  useSpotifySDK,
 } from "hooks";
 
 const SettingsView = () => {
   useMenuHideView(viewConfigMap.settings.id);
   const {
-    isSpotifyAuthorized,
-    service,
     deviceTheme,
     setDeviceTheme,
   } = useSettings();
-  const { signOut: signOutSpotify, signIn: signInWithSpotify } =
-    useSpotifySDK();
 
   const options: SelectableListOption[] = useMemo(
     () => [
@@ -55,42 +50,8 @@ const SettingsView = () => {
         ],
         preview: SplitScreenPreview.Theme,
       },
-      /** Show Spotify sign-in/sign-out if desired. */
-      ...getConditionalOption(!isSpotifyAuthorized, {
-        type: "actionSheet",
-        id: viewConfigMap.signinPopup.id,
-        label: "Sign in to Spotify",
-        listOptions: [
-          {
-            type: "action",
-            label: "Spotify",
-            onSelect: signInWithSpotify,
-          },
-        ],
-        preview: SplitScreenPreview.Music,
-      }),
-      ...getConditionalOption(isSpotifyAuthorized, {
-        type: "actionSheet",
-        id: viewConfigMap.signOutPopup.id,
-        label: "Sign out of Spotify",
-        listOptions: [
-          {
-            type: "action",
-            label: "Spotify",
-            onSelect: signOutSpotify,
-          },
-        ],
-        preview: SplitScreenPreview.Service,
-      }),
     ],
-    [
-      service,
-      signInWithSpotify,
-      deviceTheme,
-      isSpotifyAuthorized,
-      signOutSpotify,
-      setDeviceTheme,
-    ]
+    [deviceTheme, setDeviceTheme]
   );
 
   const [scrollIndex] = useScrollHandler(viewConfigMap.settings.id, options);

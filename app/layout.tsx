@@ -2,18 +2,19 @@ import { getRootAppUrl } from "api/spotify/utils";
 import StyledComponentsRegistry from "lib/registry";
 import { Metadata, Viewport } from "next";
 import Script from "next/script";
+import "./styles/globals.css";
 
 const appleTouchIconUrl = `${getRootAppUrl()}/apple-touch-icon.png`;
 const favicon32Url = `${getRootAppUrl()}/favicon-32x32.png`;
 const favicon16Url = `${getRootAppUrl()}/favicon-16x16.png`;
 
 export const metadata: Metadata = {
-  title: "iPod.js",
+  title: "M's iPod",
   description: "An iPod Classic built for the web.",
   metadataBase: new URL(getRootAppUrl()),
   openGraph: {
     url: getRootAppUrl(),
-    title: "iPod.js",
+    title: "M's iPod",
     description: "An iPod Classic built for the web.",
     type: "website",
     images: [
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
         url: "https://user-images.githubusercontent.com/21055469/71636084-6081a800-2be0-11ea-98ee-9599a3396c84.png",
         width: 1200,
         height: 630,
-        alt: "iPod.js",
+        alt: "M's iPod",
       },
     ],
   },
@@ -57,8 +58,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
-      <body>
+    <html style={{ background: "transparent" }}>
+      <body style={{ background: "transparent" }}>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>

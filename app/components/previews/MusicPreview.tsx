@@ -1,12 +1,10 @@
 import { useMemo } from "react";
 
-import { AuthPrompt, KenBurns, LoadingScreen } from "components";
+import { KenBurns } from "components";
 import { motion } from "framer-motion";
-import { useSettings } from "hooks";
 import styled from "styled-components";
-import { useFetchAlbums } from "hooks/utils/useDataFetcher";
 import { previewSlideRight } from "animation";
-import { getArtwork } from "utils";
+import { localTracks } from "lib/playlistTracks";
 
 const Container = styled(motion.div)`
   z-index: 1;
@@ -18,38 +16,14 @@ const Container = styled(motion.div)`
 `;
 
 const MusicPreview = () => {
-  const { isSpotifyAuthorized, isAppleAuthorized } = useSettings();
-
-  const {
-    data: albums,
-    isLoading,
-    error,
-  } = useFetchAlbums({
-    artworkSize: 400,
-  });
-
-  const artworkUrls = useMemo(() => {
-    if (albums && !error) {
-      return albums.pages.flatMap(
-        (page) =>
-          page?.data
-            .map((album) => getArtwork(300, album.artwork?.url))
-            .filter((url): url is string => !!url) ?? []
-      );
-    }
-
-    return [];
-  }, [albums, error]);
+  const artworkUrls = useMemo(
+    () => localTracks.map((track) => track.cover).filter((url): url is string => !!url),
+    []
+  );
 
   return (
     <Container {...previewSlideRight}>
-      {!isSpotifyAuthorized && !isAppleAuthorized ? (
-        <AuthPrompt message="Sign in to view your library" />
-      ) : isLoading && !albums ? (
-        <LoadingScreen backgroundColor="linear-gradient(180deg, #B1B5C0 0%, #686E7A 100%)" />
-      ) : (
-        <KenBurns urls={artworkUrls} />
-      )}
+      <KenBurns urls={artworkUrls} />
     </Container>
   );
 };
