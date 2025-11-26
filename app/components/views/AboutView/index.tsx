@@ -42,8 +42,8 @@ const AboutView = () => {
     },
     {
       type: "link",
-      label: "this may be of interest to you",
-      url: "https://www.shoprecove.com/",
+      label: "this may help you soon",
+      url: "https://www.instagram.com/shoprecove/?hl=en",
     },
   ];
 
