@@ -1,26 +1,22 @@
 import BatteryIndicator from "components/BatteryIndicator";
 import LoadingIndicator from "components/LoadingIndicator";
-import { useAudioPlayer, useViewContext, useSettings } from "hooks";
+import { useAudioPlayer, useViewContext } from "hooks";
 import styled from "styled-components";
 import { APP_URL } from "utils/constants/api";
 
-const Container = styled.div<{ $isBirthdayTheme: boolean }>`
+const Container = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 6px;
   height: 20px;
-  background: ${({ $isBirthdayTheme }) =>
-    $isBirthdayTheme
-      ? 'linear-gradient(180deg, #e8e8e8 0%, #d0d0d0 100%)'
-      : 'linear-gradient(180deg, #feffff 0%, #b1b6b9 100%)'};
-  border-bottom: 1px solid ${({ $isBirthdayTheme }) =>
-    $isBirthdayTheme ? '#333333' : '#7995a3'};
+  background: linear-gradient(180deg, #feffff 0%, #b1b6b9 100%);
+  border-bottom: 1px solid #7995a3;
   box-sizing: border-box;
 `;
 
-const Text = styled.h3<{ $isBirthdayTheme: boolean }>`
+const Text = styled.h3`
   margin: 0;
   font-size: 13px;
   overflow: hidden;
@@ -49,17 +45,13 @@ const StyledBatteryIndicator = styled(BatteryIndicator)`
 const Header = () => {
   const { headerTitle } = useViewContext();
   const { playbackInfo } = useAudioPlayer();
-  const { deviceTheme } = useSettings();
 
   const { isPlaying, isPaused, isLoading } = playbackInfo;
-  const isBirthdayTheme = deviceTheme === 'birthday';
-  // Fallback: if for any reason headerTitle is missing, default back to the
-  // home label so the header never renders as an empty bar.
-  const effectiveTitle = headerTitle ?? "M's iPod";
+  const effectiveTitle = headerTitle ?? "Friend's iPod";
 
   return (
-    <Container $isBirthdayTheme={isBirthdayTheme}>
-      <Text $isBirthdayTheme={isBirthdayTheme}>{effectiveTitle}</Text>
+    <Container>
+      <Text>{effectiveTitle}</Text>
       <IconContainer>
         {isLoading && (
           <IconContainer>

@@ -19,8 +19,9 @@ const Mask = styled.div`
   right: 0;
 `;
 
-const hasSplitScreenPreview = (viewId: ViewConfig["id"]) => {
-  return !!viewConfigMap[viewId].isSplitScreen;
+const hasSplitScreenPreview = (viewId: string) => {
+  const baseId = viewId.split("-")[0];
+  return !!viewConfigMap[baseId]?.isSplitScreen;
 };
 
 const ViewManager = () => {

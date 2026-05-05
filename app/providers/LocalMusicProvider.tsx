@@ -138,6 +138,23 @@ export const LocalMusicProvider = ({ children }: Props) => {
     // Set local as the default service
     setService('local' as any);
 
+    // Auto-play on mount
+    const autoPlay = async () => {
+      // Small delay to ensure audio element is ready
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      if (audioRef.current && !isPlaying) {
+        try {
+          await audioRef.current.play();
+          console.log('Auto-play successful');
+        } catch (error) {
+          console.error('Auto-play failed:', error);
+          // Many browsers block auto-play without user interaction.
+          // The iPod click wheel interaction should eventually trigger it if this fails.
+        }
+      }
+    };
+    autoPlay();
+
     return () => {
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
@@ -148,6 +165,7 @@ export const LocalMusicProvider = ({ children }: Props) => {
       audio.removeEventListener('loadstart', handleLoadStart);
       audio.pause();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setService]);
 
   // Update audio source when track changes

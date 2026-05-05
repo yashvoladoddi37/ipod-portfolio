@@ -1,4 +1,5 @@
 import { ScrollDirection } from "components/ClickWheel/sharedTypes";
+import { playWheelTick, playButtonClick, playMenuClick, playPlayPauseClick, playNavClick } from "./sounds";
 
 /** The click-wheel control associated with the particular event */
 type BaseEventContext =
@@ -17,7 +18,9 @@ export type SupportedKeyCode =
   | "Escape"
   | "Enter"
   | " "
-  | "Spacebar";
+  | "Spacebar"
+  | "["
+  | "]";
 
 /** The action that is taken on a click-wheel control */
 type BaseEventAction = "click" | "longclick" | "scroll" | "longpress";
@@ -40,40 +43,60 @@ const menuLongPressEvent = createIpodEvent("menulongpress");
 const playPauseClickEvent = createIpodEvent("playpauseclick");
 const wheelClickEvent = createIpodEvent("wheelclick");
 
-export const dispatchMenuClickEvent = () =>
+export const dispatchMenuClickEvent = () => {
+  playMenuClick();
   window.dispatchEvent(menuClickEvent);
+};
 
-export const dispatchCenterClickEvent = () =>
+export const dispatchCenterClickEvent = () => {
+  playButtonClick();
   window.dispatchEvent(centerClickEvent);
+};
 
-export const dispatchCenterLongClickEvent = () =>
+export const dispatchCenterLongClickEvent = () => {
+  playButtonClick();
   window.dispatchEvent(centerLongClickEvent);
+};
 
-export const dispatchForwardScrollEvent = () =>
+export const dispatchForwardScrollEvent = () => {
+  playWheelTick();
   window.dispatchEvent(forwardScrollEvent);
+};
 
-export const dispatchBackwardScrollEvent = () =>
+export const dispatchBackwardScrollEvent = () => {
+  playWheelTick();
   window.dispatchEvent(backwardScrollEvent);
+};
 
 export const dispatchScrollEvent = (direction: ScrollDirection) =>
   direction === "clockwise"
     ? dispatchForwardScrollEvent()
     : dispatchBackwardScrollEvent();
 
-export const dispatchWheelClickEvent = () =>
+export const dispatchWheelClickEvent = () => {
+  playButtonClick();
   window.dispatchEvent(wheelClickEvent);
+};
 
-export const dispatchMenuLongPressEvent = () =>
+export const dispatchMenuLongPressEvent = () => {
+  playMenuClick();
   window.dispatchEvent(menuLongPressEvent);
+};
 
-export const dispatchBackClickEvent = () =>
+export const dispatchBackClickEvent = () => {
+  playMenuClick();
   window.dispatchEvent(backClickEvent);
+};
 
-export const dispatchForwardClickEvent = () =>
+export const dispatchForwardClickEvent = () => {
+  playMenuClick();
   window.dispatchEvent(forwardClickEvent);
+};
 
-export const dispatchPlayPauseClickEvent = () =>
+export const dispatchPlayPauseClickEvent = () => {
+  playMenuClick();
   window.dispatchEvent(playPauseClickEvent);
+};
 
 export const dispatchIdleEvent = () => window.dispatchEvent(idleEvent);
 
@@ -97,5 +120,12 @@ export const dispatchKeyboardEvent = (key: string) => {
     case "Escape":
       dispatchMenuClickEvent();
       break;
+    case "]":
+      dispatchForwardClickEvent();
+      break;
+    case "[":
+      dispatchBackClickEvent();
+      break;
   }
 };
+

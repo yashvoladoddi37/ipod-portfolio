@@ -1,15 +1,13 @@
 import { useMemo } from "react";
 
 import {
-  getConditionalOption,
   SelectableList,
   SelectableListOption,
 } from "components";
 import { SplitScreenPreview } from "components/previews";
-import viewConfigMap, { AboutView } from "components/views";
+import viewConfigMap, { ContactView } from "components/views";
 import {
   useMenuHideView,
-  useMusicKit,
   useScrollHandler,
   useSettings,
 } from "hooks";
@@ -25,10 +23,10 @@ const SettingsView = () => {
     () => [
       {
         type: "view",
-        label: "About",
-        viewId: viewConfigMap.about.id,
-        component: () => <AboutView />,
-        preview: SplitScreenPreview.Settings,
+        label: "Contact",
+        viewId: viewConfigMap.contact.id,
+        component: () => <ContactView />,
+        preview: SplitScreenPreview.Contact,
       },
       {
         type: "actionSheet",
@@ -60,3 +58,4 @@ const SettingsView = () => {
 };
 
 export default SettingsView;
+

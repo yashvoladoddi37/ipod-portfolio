@@ -300,7 +300,7 @@ export const AudioPlayerProvider = ({ children }: Props) => {
       mediaItem = {
         ...localMusic.currentTrack,
         duration: localMusic.duration * 1000, // Convert to milliseconds
-        playlistName: "Mahitha's Birthday Playlist",
+        playlistName: "Portfolio Playlist",
         playlistArtworkUrl: localMusic.currentTrack.artwork?.url,
       };
     }

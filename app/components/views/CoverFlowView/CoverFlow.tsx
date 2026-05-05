@@ -156,6 +156,12 @@ const CoverFlow = ({ albums }: Props) => {
         ))}
       </AlbumsContainer>
 
+      <div className="absolute top-1 left-1/2 -translate-x-1/2 z-20 pointer-events-none opacity-90 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+        <p className="text-[9px] uppercase tracking-[0.15em] text-[#111] text-center font-bold">
+          Click center to flip • Scroll to navigate
+        </p>
+      </div>
+
       <AnimatePresence>
         {albums.length && !playingAlbum && (
           <InfoContainer {...fade}>

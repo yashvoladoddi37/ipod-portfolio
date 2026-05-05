@@ -20,7 +20,8 @@ export type SelectableListOptionType =
   | "song"
   | "action"
   | "actionSheet"
-  | "popup";
+  | "popup"
+  | "text";
 
 type SharedOptionProps = {
   type?: SelectableListOptionType;
@@ -78,6 +79,12 @@ export type ActionSheetOptionProps = {
   listOptions: SelectableListOption[];
 };
 
+type TextOptionProps = {
+  type: "text";
+  /** If true, the item can be selected. Useful if you want the text to trigger an action. @default false */
+  selectable?: boolean;
+};
+
 /** Depending on the option type, certain properties will be available. */
 export type SelectableListOption = SharedOptionProps &
   (
@@ -87,6 +94,7 @@ export type SelectableListOption = SharedOptionProps &
     | ActionOptionProps
     | ActionSheetOptionProps
     | PopupOptionProps
+    | TextOptionProps
   );
 
 const Container = styled.div`
@@ -118,6 +126,7 @@ interface Props {
   loading?: boolean;
   loadingNextItems?: boolean;
   emptyMessage?: string;
+  centerAlign?: boolean;
 }
 
 const SelectableList = ({
@@ -126,6 +135,7 @@ const SelectableList = ({
   loading,
   loadingNextItems,
   emptyMessage = "Nothing to see here",
+  centerAlign = false,
 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
@@ -187,6 +197,7 @@ const SelectableList = ({
               key={`option-${option.label}-${index}`}
               option={option}
               isActive={index === activeIndex}
+              isCentered={centerAlign}
             />
           ))}
         </Container>

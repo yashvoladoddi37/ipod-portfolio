@@ -46,132 +46,36 @@ const Silver: DeviceTheme = {
 
 const Black: DeviceTheme = {
   body: {
-    background: "linear-gradient(180deg, #7d7c7d 0%, #1e1e1e 100%)",
-  },
-  clickwheel: {
-    background: "#2a2a2a",
-    outline: "#1a1a1a",
-    button: "#FFFFFF",
-    centerButton: {
-      background: "#7d7c7d",
-      boxShadow: "rgb(50, 50, 50)",
-      outline: "#1a1a1a",
-    },
-  },
-};
-
-const U2: DeviceTheme = {
-  body: {
-    background: "linear-gradient(180deg, #7d7c7d 0%, #1e1e1e 100%)",
-  },
-  clickwheel: {
-    background: "#de2029",
-    outline: "#1a1a1a",
-    button: "#ffffff",
-    centerButton: {
-      background: "#5d5c5d",
-      boxShadow: "rgb(50, 50, 50)",
-      outline: "#1a1a1a",
-    },
-  },
-};
-
-// This theme was created in collaboration with Parlophone Records
-// for the artist Mnelia.
-const Mnelia: DeviceTheme = {
-  body: {
-    background:
-      "linear-gradient(193.42deg, #8676d6 49.48%, rgba(238, 65, 122, 0.74) 100%);",
-    sticker1: {
-      background: `url('${APP_URL}/palm.svg') no-repeat bottom left`,
-      styles: {
-        bottom: 0,
-        left: 0,
-        height: "40%",
-        width: "50%",
-        marginLeft: "-10%",
-        marginBottom: "-10%",
-        mixBlendMode: "multiply",
-      },
-    },
-    sticker2: {
-      background: `url('${APP_URL}/palm.svg') no-repeat`,
-      styles: {
-        position: "absolute",
-        bottom: 0,
-        right: 0,
-        height: "40%",
-        width: "50%",
-        marginRight: "-10%",
-        marginBottom: "-35%",
-        mixBlendMode: "multiply",
-      },
-    },
+    background: "linear-gradient(180deg, #333 0%, #000 100%)",
     sticker3: {
-      background: `url("${APP_URL}/mnelia_signature.png") no-repeat`,
+      background: "transparent",
       styles: {
-        position: "absolute",
         bottom: "42%",
-        width: "60px",
-        height: "40px",
-        backgroundSize: "contain",
-        right: 15,
-        opacity: "50%",
+        right: "15px",
+        fontSize: "10px",
+        fontWeight: "bold",
+        color: "rgba(255, 255, 255, 0.1)",
+        textTransform: "uppercase",
+        letterSpacing: "2px",
+        pointerEvents: "none",
+        content: "'YASH'",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
       },
-    },
+    }
   },
   clickwheel: {
-    background: "#2a2a2acf",
-    outline: "#62315e",
-    button: "#ffffff",
-    centerButton: {
-      background: "#c69edb",
-      boxShadow: "rgb(142 54 101)",
-      outline: "#62315e",
-    },
-  },
-};
-
-// Birthday theme inspired by Mahitha's birthday website - Based on Black theme
-const Birthday: DeviceTheme = {
-  body: {
-    background: "linear-gradient(180deg, #7d7c7d 0%, #1e1e1e 100%)",
-    sticker1: {
-      background: "radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.03), transparent 50%)",
-      styles: {
-        bottom: "10%",
-        left: "5%",
-        height: "30%",
-        width: "40%",
-        borderRadius: "50%",
-        filter: "blur(20px)",
-        animation: "float1 8s ease-in-out infinite",
-      },
-    },
-    sticker2: {
-      background: "radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.02), transparent 50%)",
-      styles: {
-        top: "15%",
-        right: "8%",
-        height: "25%",
-        width: "35%",
-        borderRadius: "50%",
-        filter: "blur(15px)",
-        animation: "float2 10s ease-in-out infinite",
-      },
-    },
-
-  },
-  clickwheel: {
-    background: "#2a2a2a",
-    outline: "#1a1a1a",
+    background: "#1a1a1a",
+    outline: "#000",
     button: "#FFFFFF",
     centerButton: {
-      background: "#7d7c7d",
-      boxShadow: "rgb(50, 50, 50)",
-      outline: "#1a1a1a",
+      background: "#333",
+      boxShadow: "rgb(20, 20, 20)",
+      outline: "#000",
     },
   },
 };
 
-export { Silver, Black, U2, Mnelia, Birthday };
+export { Silver, Black };
+

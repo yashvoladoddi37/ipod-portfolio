@@ -1,6 +1,5 @@
 "use client";
-import { memo, useCallback, useState } from "react";
-import * as SpotifyUtils from "utils/spotify";
+import { memo, useState } from "react";
 import {
   AudioPlayerProvider,
   SettingsContext,
@@ -8,7 +7,6 @@ import {
   useEffectOnce,
 } from "hooks";
 import { ClickWheel, ViewManager } from "components";
-import LyricsDisplay from "components/LyricsDisplay";
 import {
   ScreenContainer,
   ClickWheelContainer,
@@ -16,50 +14,28 @@ import {
   Sticker,
   Sticker2,
   Sticker3,
+  ViewArea,
 } from "components/Ipod/Styled";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LocalMusicProvider } from "providers/LocalMusicProvider";
 import CoverArtReflection from "components/CoverArtReflection";
 import ViewContextProvider from "providers/ViewContextProvider";
-import { useRouter } from "next/navigation";
 import { GlobalStyles } from "components/Ipod/GlobalStyles";
-import Script from "next/script";
+import InputIndicator from "components/InputIndicator";
+import MiniPlayer from "components/MiniPlayer";
 
 type Props = {
   appleAccessToken: string;
-  /**
-   * Used when the user is redirected back from Spotify's OAuth flow.
-   * This is the code that is used to get the access token.
-   */
-  spotifyCallbackCode?: string;
   playlistMetadata: any[];
 };
 
 const Ipod = ({
-  appleAccessToken,
-  spotifyCallbackCode,
-  playlistMetadata,
+  playlistMetadata: _playlistMetadata,
 }: Props) => {
-  const router = useRouter();
   const queryClient = new QueryClient();
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleCheckSpotifyCallback = useCallback(
-    async (code: string) => {
-      await SpotifyUtils.handleSpotifyCode(code);
-
-      setIsLoading(false);
-
-      router.replace("/");
-    },
-    [router]
-  );
-
   useEffectOnce(() => {
-    if (spotifyCallbackCode) {
-      handleCheckSpotifyCallback(spotifyCallbackCode);
-      return;
-    }
     setIsLoading(false);
   });
 
@@ -70,6 +46,7 @@ const Ipod = ({
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyles />
+      <InputIndicator />
       <SettingsProvider>
         <ViewContextProvider>
           <LocalMusicProvider>
@@ -82,14 +59,16 @@ const Ipod = ({
                           <Sticker2 $deviceTheme={deviceTheme} />
                           <Sticker3 $deviceTheme={deviceTheme} />
                           <ScreenContainer $deviceTheme={deviceTheme}>
-                            <ViewManager />
+                            <ViewArea>
+                              <ViewManager />
+                            </ViewArea>
+                            <MiniPlayer />
                           </ScreenContainer>
                           <ClickWheelContainer>
                             <ClickWheel />
                           </ClickWheelContainer>
                           <CoverArtReflection />
                         </Shell>
-                        <LyricsDisplay playlistMetadata={playlistMetadata} />
                       </>
                     )}
                   </SettingsContext.Consumer>
@@ -102,3 +81,4 @@ const Ipod = ({
 };
 
 export default memo(Ipod);
+

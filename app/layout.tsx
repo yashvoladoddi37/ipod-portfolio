@@ -1,50 +1,15 @@
-import { getRootAppUrl } from "api/spotify/utils";
 import StyledComponentsRegistry from "lib/registry";
 import { Metadata, Viewport } from "next";
-import Script from "next/script";
 import "./styles/globals.css";
 
-const appleTouchIconUrl = `${getRootAppUrl()}/apple-touch-icon.png`;
-const favicon32Url = `${getRootAppUrl()}/favicon-32x32.png`;
-const favicon16Url = `${getRootAppUrl()}/favicon-16x16.png`;
-
 export const metadata: Metadata = {
-  title: "M's iPod",
-  description: "An iPod Classic built for the web.",
-  metadataBase: new URL(getRootAppUrl()),
+  title: "yashvoladoddi.in | AI Engineer",
+  description: "A unique interactive iPod-style resume and portfolio for Yashpreet Voladoddi, AI Engineer.",
   openGraph: {
-    url: getRootAppUrl(),
-    title: "M's iPod",
-    description: "An iPod Classic built for the web.",
+    title: "yashvoladoddi.in | AI Engineer",
+    description: "Interactive iPod-style resume for Yashpreet Voladoddi.",
     type: "website",
-    images: [
-      {
-        url: "https://user-images.githubusercontent.com/21055469/71636084-6081a800-2be0-11ea-98ee-9599a3396c84.png",
-        width: 1200,
-        height: 630,
-        alt: "M's iPod",
-      },
-    ],
   },
-  icons: [
-    {
-      rel: "apple-touch-icon",
-      sizes: "180x180",
-      url: appleTouchIconUrl,
-    },
-    {
-      rel: "icon",
-      type: "image/png",
-      sizes: "32x32",
-      url: favicon32Url,
-    },
-    {
-      rel: "icon",
-      type: "image/png",
-      sizes: "16x16",
-      url: favicon16Url,
-    },
-  ],
 };
 
 export const viewport: Viewport = {
@@ -58,10 +23,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html style={{ background: "transparent" }}>
-      <body style={{ background: "transparent" }}>
+    <html lang="en">
+      <body style={{ 
+        margin: 0, 
+        background: "radial-gradient(circle at center, #1a1a1a 0%, #000 100%)",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden"
+      }}>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>
   );
 }
+
+
+
+

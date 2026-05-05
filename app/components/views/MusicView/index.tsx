@@ -9,7 +9,6 @@ import {
   NowPlayingView,
   PlaylistsView,
   SearchView,
-  SongsView,
   viewConfigMap,
 } from "components/views";
 import {
@@ -19,6 +18,7 @@ import {
   useSettings,
 } from "hooks";
 import { playlistTracks } from "lib/playlistTracks";
+import * as Utils from "utils";
 
 const MusicView = () => {
   const { isAppleAuthorized, service } = useSettings();
@@ -28,14 +28,21 @@ const MusicView = () => {
   const options: SelectableListOption[] = useMemo(() => {
     const arr: SelectableListOption[] = [];
 
-    // Show local playlist for local music service
+    // Show songs directly for local music service
     if (service === "local") {
-      arr.push({
-        type: "view",
-        label: "Mahitha's Birthday Playlist",
-        viewId: viewConfigMap.songs.id,
-        component: () => <SongsView songs={playlistTracks} />,
-        preview: SplitScreenPreview.Music,
+      playlistTracks.forEach((song) => {
+        arr.push({
+          type: "song",
+          label: song.name,
+          sublabel: `${song.artistName} • ${song.albumName}`,
+          queueOptions: {
+            song,
+            startPosition: 0,
+          },
+          imageUrl: Utils.getArtwork(50, song.artwork?.url),
+          showNowPlayingView: true,
+          longPressOptions: Utils.getMediaOptions("song", song.id),
+        });
       });
     }
 

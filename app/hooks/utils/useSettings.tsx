@@ -129,7 +129,7 @@ export const SettingsProvider = ({ children }: Props) => {
     isSpotifyAuthorized: false,
     service: "local",
     colorScheme: "default",
-    deviceTheme: "birthday",
+    deviceTheme: "silver",
   });
 
   const handleMount = useCallback(() => {
@@ -140,7 +140,8 @@ export const SettingsProvider = ({ children }: Props) => {
         "local",
       colorScheme:
         (localStorage.getItem(COLOR_SCHEME_KEY) as ColorScheme) ?? "default",
-      deviceTheme: "birthday", // Force birthday theme
+      deviceTheme:
+        (localStorage.getItem(DEVICE_COLOR_KEY) as DeviceThemeName) ?? "silver",
     }));
   }, []);
 

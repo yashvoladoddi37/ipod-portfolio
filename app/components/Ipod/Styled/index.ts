@@ -7,8 +7,9 @@ export const Shell = styled.div<{ $deviceTheme: DeviceThemeName }>`
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 370px;
-  max-height: 37em;
+  width: 380px;
+  height: 600px;
+  max-height: 90vh;
   margin: auto;
   border-radius: 30px;
   box-shadow: inset 0 0 2.4em #555;
@@ -32,6 +33,8 @@ export const Shell = styled.div<{ $deviceTheme: DeviceThemeName }>`
   ${Screen.SM.MediaQuery} {
     animation: none;
     width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     max-height: unset;
     border-radius: 0;
     -webkit-box-reflect: unset;
@@ -52,17 +55,15 @@ export const Shell = styled.div<{ $deviceTheme: DeviceThemeName }>`
 
 export const ScreenContainer = styled.div<{ $deviceTheme: DeviceThemeName }>`
   position: relative;
-  height: 260px;
+  height: 340px;
   margin: ${Unit.LG} ${Unit.LG} 0;
-  border: 4px solid ${({ $deviceTheme }) =>
-    $deviceTheme === 'birthday' ? '#333333' : 'black'};
+  border: 4px solid black;
   border-radius: ${Unit.XS};
   overflow: hidden;
-  background: ${({ $deviceTheme }) =>
-    $deviceTheme === 'birthday' ? '#f0f0f0' : 'white'};
+  background: white;
   animation: fadeFromBlack 0.5s;
-  box-shadow: ${({ $deviceTheme }) =>
-    $deviceTheme === 'birthday' ? 'inset 0 2px 8px rgba(0, 0, 0, 0.5)' : 'none'};
+  display: flex;
+  flex-direction: column;
 
   @keyframes fadeFromBlack {
     0% {
@@ -73,6 +74,12 @@ export const ScreenContainer = styled.div<{ $deviceTheme: DeviceThemeName }>`
   ${Screen.SM.MediaQuery} {
     margin: ${Unit.MD} ${Unit.MD} 0;
   }
+`;
+
+export const ViewArea = styled.div`
+  position: relative;
+  flex: 1;
+  overflow: hidden;
 `;
 
 export const ClickWheelContainer = styled.div`

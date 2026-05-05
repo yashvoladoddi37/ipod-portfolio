@@ -5,26 +5,28 @@ import { SelectableListOption } from ".";
 import { APP_URL } from "utils/constants/api";
 import * as Utils from "utils";
 
-const LabelContainer = styled.div`
+const LabelContainer = styled.div<{ $isCentered?: boolean; $isText?: boolean }>`
   flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-right: ${Unit.MD};
+  white-space: ${(props) => (props.$isText ? "normal" : "nowrap")};
+  overflow: ${(props) => (props.$isText ? "visible" : "hidden")};
+  text-overflow: ${(props) => (props.$isText ? "clip" : "ellipsis")};
+  padding-right: ${(props) => (props.$isCentered ? "0" : Unit.MD)};
+  text-align: ${(props) => (props.$isCentered ? "center" : props.$isText ? "justify" : "left")};
 `;
 
-const Label = styled.h3`
+const Label = styled.h3<{ $isText?: boolean }>`
   margin: 0;
   padding: ${Unit.XXS};
-  font-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: ${(props) => (props.$isText ? "16px" : "14px")};
+  white-space: ${(props) => (props.$isText ? "normal" : "nowrap")};
+  overflow: ${(props) => (props.$isText ? "visible" : "hidden")};
+  text-overflow: ${(props) => (props.$isText ? "clip" : "ellipsis")};
   color: #1a1a1a;
   font-family: 'Ranade', 'FK Grotesk', -apple-system, BlinkMacSystemFont,
     system-ui, sans-serif;
-  font-weight: 400;
+  font-weight: ${(props) => (props.$isText ? "500" : "400")};
   letter-spacing: 0.02em;
+  line-height: ${(props) => (props.$isText ? "1.6" : "1.2")};
 `;
 
 const Sublabel = styled.h3`
@@ -38,12 +40,15 @@ const Sublabel = styled.h3`
   text-overflow: ellipsis;
 `;
 
-const Container = styled.div<{ $isActive?: boolean }>`
+const Container = styled.div<{ $isActive?: boolean; $isCentered?: boolean; $isSelectable?: boolean }>`
   display: flex;
   align-items: center;
+  justify-content: ${(props) => (props.$isCentered ? "center" : "flex-start")};
+  padding: ${Unit.XS} ${Unit.MD};
 
   ${(props) =>
     props.$isActive &&
+    props.$isSelectable !== false &&
     css`
       ${LabelContainer} {
         padding-right: 0;
@@ -69,11 +74,15 @@ const Icon = styled.img`
 interface Props {
   option: SelectableListOption;
   isActive: boolean;
+  isCentered?: boolean;
 }
 
-const SelectableListItem = ({ option, isActive }: Props) => {
+const SelectableListItem = ({ option, isActive, isCentered }: Props) => {
+  const isText = option.type === "text";
+  const isSelectable = option.type !== "text" || (option as any).selectable;
+
   return (
-    <Container $isActive={isActive}>
+    <Container $isActive={isActive} $isCentered={isCentered} $isSelectable={isSelectable}>
       {option.imageUrl && (
         <Image
           alt="List item"
@@ -84,11 +93,11 @@ const SelectableListItem = ({ option, isActive }: Props) => {
           }}
         />
       )}
-      <LabelContainer>
-        <Label>{option.label}</Label>
+      <LabelContainer $isCentered={isCentered} $isText={isText}>
+        <Label $isText={isText}>{option.label}</Label>
         {option.sublabel && <Sublabel>{option.sublabel}</Sublabel>}
       </LabelContainer>
-      {isActive && <Icon src={`${APP_URL}/arrow_right.svg`} />}
+      {isActive && !isCentered && isSelectable && <Icon src={`${APP_URL}/arrow_right.svg`} />}
     </Container>
   );
 };

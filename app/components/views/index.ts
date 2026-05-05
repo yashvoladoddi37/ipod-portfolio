@@ -17,6 +17,16 @@ export { default as SearchView } from "./SearchView";
 export { default as SettingsView } from "./SettingsView";
 export { default as SongsView } from "./SongsView";
 
+// Portfolio Views
+export { default as ProfileView } from "./ProfileView";
+export { default as ExperienceView } from "./ExperienceView";
+export { default as ExperienceDetailView } from "./ExperienceDetailView";
+export { default as ProjectsView } from "./ProjectsView";
+export { default as ProjectDetailView } from "./ProjectDetailView";
+export { default as SkillsView } from "./SkillsView";
+export { default as EducationView } from "./EducationView";
+export { default as ContactView } from "./ContactView";
+
 export type ViewType =
   | "screen"
   | "actionSheet"
@@ -34,13 +44,56 @@ export type ViewConfig = {
 
 export const viewConfigMap: Record<string, ViewConfig> = {
   // Split Screen Views
-  home: { id: "home", title: "M's iPod", type: "screen", isSplitScreen: true },
+  home: { id: "home", title: "yashvoladoddi.in", type: "screen", isSplitScreen: true },
+  
+  profile: {
+    id: "profile",
+    title: "About Me",
+    type: "screen",
+    isSplitScreen: false,
+    preview: SplitScreenPreview.Profile,
+  },
+  experience: {
+    id: "experience",
+    title: "Experience",
+    type: "screen",
+    isSplitScreen: false,
+    preview: SplitScreenPreview.Experience,
+  },
+  projects: {
+    id: "projects",
+    title: "Projects",
+    type: "screen",
+    isSplitScreen: false,
+    preview: SplitScreenPreview.Projects,
+  },
+  skills: {
+    id: "skills",
+    title: "Skills",
+    type: "screen",
+    isSplitScreen: false,
+    preview: SplitScreenPreview.Skills,
+  },
+  education: {
+    id: "education",
+    title: "Education",
+    type: "screen",
+    isSplitScreen: false,
+    preview: SplitScreenPreview.Education,
+  },
+  contact: {
+    id: "contact",
+    title: "Contact",
+    type: "screen",
+    isSplitScreen: false,
+    preview: SplitScreenPreview.Contact,
+  },
+
   music: {
     id: "music",
     title: "Music",
     type: "screen",
-    isSplitScreen: true,
-    preview: SplitScreenPreview.Music,
+    isSplitScreen: false,
   },
   games: {
     id: "games",
@@ -58,6 +111,16 @@ export const viewConfigMap: Record<string, ViewConfig> = {
   },
 
   // Fullscreen Views
+  experienceDetail: {
+    id: "experienceDetail",
+    title: "Job Details",
+    type: "screen",
+  },
+  projectDetail: {
+    id: "projectDetail",
+    title: "Project Details",
+    type: "screen",
+  },
   about: {
     id: "about",
     title: "About",
@@ -98,7 +161,7 @@ export const viewConfigMap: Record<string, ViewConfig> = {
     id: "nowPlaying",
     title: "Now Playing",
     type: "screen",
-    preview: SplitScreenPreview.Music,
+    preview: SplitScreenPreview.NowPlaying,
   },
   playlists: {
     id: "playlists",
@@ -186,3 +249,4 @@ export const viewConfigMap: Record<string, ViewConfig> = {
 };
 
 export default viewConfigMap;
+

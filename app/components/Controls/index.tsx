@@ -71,7 +71,7 @@ const Controls = () => {
       const newTime = Math.max(playbackInfo.currentTime - 5, 0);
       seekToTime(newTime);
     }
-  }, [isScrubbing, playbackInfo.currentTime, seekToTime]);
+  }, [isScrubbing, playbackInfo.currentTime, playbackInfo.duration, seekToTime]);
 
   useEventListener<IpodEvent>("centerclick", handleCenterClick);
   useEventListener<IpodEvent>("forwardscroll", handleGlobalSeekForward);

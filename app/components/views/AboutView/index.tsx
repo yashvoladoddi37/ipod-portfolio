@@ -4,6 +4,7 @@ import { useMenuHideView, useScrollHandler } from "hooks";
 import styled from "styled-components";
 import { Unit } from "utils/constants";
 
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -32,18 +33,28 @@ const AboutView = () => {
   const options: SelectableListOption[] = [
     {
       type: "link",
-      label: "my pinterest",
-      url: "https://in.pinterest.com/mahithamans/",
+      label: "My LinkedIn",
+      url: "https://www.linkedin.com/in/yashpreet-voladoddi/",
     },
     {
       type: "link",
-      label: "the playlist on spotify",
-      url: "https://open.spotify.com/playlist/5d7xgGIsWMEh55d3UlHeN1?si=a6aa39a660be4bc0",
+      label: "My Instagram",
+      url: "https://www.instagram.com/yashvoladoddi/",
     },
     {
       type: "link",
-      label: "this may help you soon",
-      url: "https://www.instagram.com/shoprecove/?hl=en",
+      label: "The Project GitHub",
+      url: "https://github.com/yashvoladoddi37/ipod-portfolio",
+    },
+    {
+      type: "link",
+      label: "My Spotify",
+      url: "https://open.spotify.com/user/31k4lduzutgqaoonc3mbgzf6wx3i?si=c668407bce0c4357",
+    },
+    {
+      type: "link",
+      label: "Original iPod Project",
+      url: "https://github.com/tvillarete/ipod-classic-js",
     },
   ];
 
@@ -53,7 +64,7 @@ const AboutView = () => {
     <Container>
       <ListContainer>
         <TitleContainer>
-          <Title>mahitha's birthday ipod</Title>
+          <Title>yashvoladoddi.in</Title>
         </TitleContainer>
         <SelectableList options={options} activeIndex={scrollIndex} />
       </ListContainer>

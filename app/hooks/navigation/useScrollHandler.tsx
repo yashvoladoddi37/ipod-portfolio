@@ -57,7 +57,7 @@ const useScrollHandler = (
   const timeoutIdRef = useRef<NodeJS.Timeout>();
   /** Only fire events on the top-most view. */
   const currentView = viewStack[viewStack.length - 1];
-  const isActive = currentView?.id === id;
+  const isActive = currentView?.id === id || currentView?.id?.startsWith(`${id}-`);
   const wasActiveRef = useRef(isActive);
 
   /** Wait until the user stops scrolling to check for a new preview to display. */
@@ -111,7 +111,7 @@ const useScrollHandler = (
     setIndex((prevIndex) => {
       if (prevIndex > 0 && isActive) {
         triggerHaptics(10);
-        handleCheckForPreview(prevIndex + 1);
+        handleCheckForPreview(prevIndex - 1);
         return prevIndex - 1;
       }
 
@@ -125,9 +125,10 @@ const useScrollHandler = (
       component: React.ReactNode | ((...args: any) => JSX.Element),
       headerTitle?: string
     ) => {
+      const baseId = id.split("-")[0];
       showView({
         id,
-        type: viewConfigMap[id]?.type as any,
+        type: (viewConfigMap[baseId]?.type ?? "screen") as any,
         component,
         headerTitle,
       });

@@ -4,6 +4,8 @@ import NowPlayingPreview from "./NowPlayingPreview";
 import ServicePreview from "./ServicePreview";
 import SettingsPreview from "./SettingsPreview";
 import ThemePreview from "./ThemePreview";
+import PlaceholderPreview from "./PlaceholderPreview";
+import ProfilePreview from "./ProfilePreview";
 
 export enum SplitScreenPreview {
   Music = "music",
@@ -12,6 +14,12 @@ export enum SplitScreenPreview {
   NowPlaying = "nowPlaying",
   Service = "service",
   Theme = "theme",
+  Profile = "profile",
+  Experience = "experience",
+  Projects = "projects",
+  Skills = "skills",
+  Education = "education",
+  Contact = "contact",
 }
 
 export const Previews = {
@@ -21,4 +29,11 @@ export const Previews = {
   [SplitScreenPreview.NowPlaying]: () => <NowPlayingPreview />,
   [SplitScreenPreview.Service]: () => <ServicePreview />,
   [SplitScreenPreview.Theme]: () => <ThemePreview />,
+  [SplitScreenPreview.Profile]: () => <ProfilePreview />,
+  [SplitScreenPreview.Experience]: () => <ProfilePreview />,
+  [SplitScreenPreview.Projects]: () => <ProfilePreview />,
+  [SplitScreenPreview.Skills]: () => <ProfilePreview />,
+  [SplitScreenPreview.Education]: () => <ProfilePreview />,
+  [SplitScreenPreview.Contact]: () => <ProfilePreview />,
 };
+

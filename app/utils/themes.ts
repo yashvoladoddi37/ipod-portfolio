@@ -5,7 +5,6 @@ import * as Theme from "utils/constants/Theme";
 const supportedThemes = {
   silver: "silver",
   black: "black",
-  birthday: "birthday",
 };
 
 export type DeviceThemeName = keyof typeof supportedThemes;
@@ -14,8 +13,7 @@ export const getTheme = (deviceTheme: DeviceThemeName): Theme.DeviceTheme => {
   switch (deviceTheme) {
     case "black":
       return Theme.Black;
-    case "birthday":
-      return Theme.Birthday;
+    case "silver":
     default:
       return Theme.Silver;
   }
@@ -35,10 +33,11 @@ export const getThemeParam = () => {
   const themeParam = params.get("theme")?.toLowerCase();
 
   if (!themeParam || !(themeParam in supportedThemes)) {
-    return;
+    return "silver";
   }
 
   localStorage.setItem(DEVICE_COLOR_KEY, themeParam);
 
   return themeParam as DeviceThemeName;
 };
+

@@ -79,8 +79,9 @@ const NoLyricsMessage = styled.div`
 
 const ToggleButton = styled.button<{ $isVisible: boolean }>`
   position: fixed;
-  top: 20px;
-  right: ${({ $isVisible }) => ($isVisible ? '420px' : '20px')};
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1001;
   background: rgba(0, 0, 0, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -96,7 +97,7 @@ const ToggleButton = styled.button<{ $isVisible: boolean }>`
   &:hover {
     background: rgba(0, 0, 0, 0.9);
     border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-1px);
+    transform: translateX(-50%) translateY(-1px);
   }
 `;
 

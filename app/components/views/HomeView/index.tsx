@@ -1,17 +1,20 @@
 import { useCallback, useMemo } from "react";
 
 import {
-  getConditionalOption,
   SelectableList,
   SelectableListOption,
 } from "components";
 import { SplitScreenPreview } from "components/previews";
 import {
-  CoverFlowView,
-  GamesView,
+  ContactView,
+  EducationView,
+  ExperienceView,
   MusicView,
   NowPlayingView,
+  ProfileView,
+  ProjectsView,
   SettingsView,
+  SkillsView,
   viewConfigMap,
 } from "components/views";
 import {
@@ -23,7 +26,7 @@ import {
 import { IpodEvent } from "utils/events";
 
 const strings = {
-  nowPlaying: "Now Playing",
+  music: "Music",
 };
 
 const HomeView = () => {
@@ -34,24 +37,51 @@ const HomeView = () => {
     () => [
       {
         type: "view",
-        label: "Message Cards",
-        viewId: viewConfigMap.coverFlow.id,
-        component: () => <CoverFlowView />,
-        preview: SplitScreenPreview.Music,
-      },
-      {
-        type: "view",
-        label: "Music",
+        label: strings.music,
         viewId: viewConfigMap.music.id,
         component: () => <MusicView />,
-        preview: SplitScreenPreview.Music,
       },
       {
         type: "view",
-        label: "Games",
-        viewId: viewConfigMap.games.id,
-        component: () => <GamesView />,
-        preview: SplitScreenPreview.Games,
+        label: "About Me",
+        viewId: viewConfigMap.profile.id,
+        component: () => <ProfileView />,
+        preview: SplitScreenPreview.Profile,
+      },
+      {
+        type: "view",
+        label: "Experience",
+        viewId: viewConfigMap.experience.id,
+        component: () => <ExperienceView />,
+        preview: SplitScreenPreview.Experience,
+      },
+      {
+        type: "view",
+        label: "Projects",
+        viewId: viewConfigMap.projects.id,
+        component: () => <ProjectsView />,
+        preview: SplitScreenPreview.Projects,
+      },
+      {
+        type: "view",
+        label: "Skills",
+        viewId: viewConfigMap.skills.id,
+        component: () => <SkillsView />,
+        preview: SplitScreenPreview.Skills,
+      },
+      {
+        type: "view",
+        label: "Education",
+        viewId: viewConfigMap.education.id,
+        component: () => <EducationView />,
+        preview: SplitScreenPreview.Education,
+      },
+      {
+        type: "view",
+        label: "Contact",
+        viewId: viewConfigMap.contact.id,
+        component: () => <ContactView />,
+        preview: SplitScreenPreview.Contact,
       },
       {
         type: "view",
@@ -60,15 +90,8 @@ const HomeView = () => {
         component: () => <SettingsView />,
         preview: SplitScreenPreview.Settings,
       },
-      ...getConditionalOption(!!nowPlayingItem, {
-        type: "view",
-        label: strings.nowPlaying,
-        viewId: viewConfigMap.nowPlaying.id,
-        component: () => <NowPlayingView />,
-        preview: SplitScreenPreview.NowPlaying,
-      }),
     ],
-    [nowPlayingItem]
+    []
   );
 
   const [scrollIndex] = useScrollHandler(viewConfigMap.home.id, options);
@@ -79,7 +102,6 @@ const HomeView = () => {
     const shouldShowNowPlaying =
       !!nowPlayingItem &&
       activeView.id !== viewConfigMap.nowPlaying.id &&
-      activeView.id !== viewConfigMap.coverFlow.id &&
       activeView.id !== viewConfigMap.keyboard.id;
 
     // Only show the now playing view if we're playing a song and not already on that view.
@@ -98,3 +120,4 @@ const HomeView = () => {
 };
 
 export default HomeView;
+

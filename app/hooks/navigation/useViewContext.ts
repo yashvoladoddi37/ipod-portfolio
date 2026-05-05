@@ -57,10 +57,11 @@ export const useViewContext = (): ViewContextHook => {
 
   const showView = useCallback(
     (view: ViewOptions) => {
+      const baseId = view.id.split("-")[0];
       setViewContextState((prevViewState) => ({
         ...prevViewState,
         viewStack: [...prevViewState.viewStack, view],
-        headerTitle: view.headerTitle ?? views[view.id]?.title ?? "view",
+        headerTitle: view.headerTitle ?? views[baseId]?.title ?? "view",
       }));
     },
     [setViewContextState]
@@ -76,8 +77,9 @@ export const useViewContext = (): ViewContextHook => {
             )
           : prevViewState.viewStack.slice(0, -1);
         const newTopView = newViewStack[newViewStack.length - 1];
+        const baseId = newTopView?.id.split("-")[0];
         const headerTitle = newTopView
-          ? (newTopView.headerTitle ?? views[newTopView.id]?.title)
+          ? (newTopView.headerTitle ?? views[baseId ?? ""]?.title)
           : undefined;
 
         return {

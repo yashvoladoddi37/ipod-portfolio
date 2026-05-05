@@ -12,7 +12,8 @@ const useMenuHideView = (id: string) => {
   const { hideView, viewStack } = useViewContext();
 
   const handleClick = useCallback(() => {
-    if (viewStack[viewStack.length - 1].id === id) {
+    const currentId = viewStack[viewStack.length - 1].id;
+    if (currentId === id || currentId.startsWith(`${id}-`)) {
       hideView();
     }
   }, [hideView, id, viewStack]);

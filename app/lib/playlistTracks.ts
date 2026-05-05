@@ -1,4 +1,4 @@
-// Local playlist tracks for Mahitha's birthday iPod
+// Local playlist tracks
 
 export interface LocalTrack {
   id: string;
@@ -18,7 +18,7 @@ export const convertToMediaApiSong = (track: LocalTrack): MediaApi.Song => ({
   artwork: { url: track.cover },
   duration: track.duration || 0,
   trackNumber: 0,
-  albumName: "Mahitha's Birthday Playlist",
+  albumName: "Portfolio Playlist",
 });
 
 export const localTracks: LocalTrack[] = [
