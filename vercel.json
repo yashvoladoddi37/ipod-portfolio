@@ -1,0 +1,6 @@
+{
+  "deploymentProtection": {
+    "vercelAuthentication": false
+  },
+  "vercelToolbar": false
+}
