@@ -67,9 +67,9 @@ export const projects = [
   },
   {
     id: "paysense-concierge",
-    name: "PaySense Agentic Concierge",
+    name: "PaySense Agentic AI Hackathon Finalist Demo",
     description: "Top 10 Hackathon Finalist Pine Labs Playground AI Hackathon 2025",
-    link: "https://github.com/yashvoladoddi37", // Defaulting to GitHub as no specific link was found in PDF
+    link: "https://drive.google.com/file/d/1--c62UaGqfqhc07RLNWP-E8oN3xtTZkW/view",
     bullets: [
       "Prototyped a multi-agent e-commerce workflow using AWS Bedrock (Claude Sonnet), placing in the Top 10 out of hundreds of participants."
     ]
@@ -78,7 +78,7 @@ export const projects = [
     id: "kanji-gen",
     name: "Japanese Kanji Generation Model & OCR Pipeline",
     description: "GitHub / HuggingFace Profiles",
-    link: "https://huggingface.co/yashvoladoddi37", // Updated from resume
+    link: "https://huggingface.co/datasets/yashvoladoddi37/kanjienglish",
     bullets: [
       "Generated 6,000+ unique Kanji characters from English prompts utilizing Stable Diffusion; processed 11,000+ movie posters utilizing AI-assisted title extraction over LLaMA 3.2 (11B)."
     ]
