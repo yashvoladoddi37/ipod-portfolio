@@ -3,10 +3,10 @@ import { Metadata, Viewport } from "next";
 import "./styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "yashvoladoddi.in | AI Engineer",
+  title: "yv's portfolio | AI Engineer",
   description: "A unique interactive iPod-style resume and portfolio for Yashpreet Voladoddi, AI Engineer.",
   openGraph: {
-    title: "yashvoladoddi.in | AI Engineer",
+    title: "yv's portfolio | AI Engineer",
     description: "Interactive iPod-style resume for Yashpreet Voladoddi.",
     type: "website",
   },

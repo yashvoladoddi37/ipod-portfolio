@@ -64,7 +64,7 @@ const AboutView = () => {
     <Container>
       <ListContainer>
         <TitleContainer>
-          <Title>yashvoladoddi.in</Title>
+          <Title>yv's portfolio</Title>
         </TitleContainer>
         <SelectableList options={options} activeIndex={scrollIndex} />
       </ListContainer>
