@@ -83,7 +83,8 @@ export const ViewArea = styled.div`
 `;
 
 export const ClickWheelContainer = styled.div`
-  margin: ${Unit.XL} auto;
+  margin: auto;
+  padding-bottom: ${Unit.LG};
 `;
 
 export const Sticker = styled.div<{ $deviceTheme: DeviceThemeName }>`

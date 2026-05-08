@@ -23,6 +23,7 @@ import ViewContextProvider from "providers/ViewContextProvider";
 import { GlobalStyles } from "components/Ipod/GlobalStyles";
 import InputIndicator from "components/InputIndicator";
 import MiniPlayer from "components/MiniPlayer";
+import ScrollIndicator from "components/ClickWheel/ScrollIndicator";
 
 type Props = {
   appleAccessToken: string;
@@ -64,6 +65,7 @@ const Ipod = ({
                             </ViewArea>
                             <MiniPlayer />
                           </ScreenContainer>
+                          <ScrollIndicator />
                           <ClickWheelContainer>
                             <ClickWheel />
                           </ClickWheelContainer>
