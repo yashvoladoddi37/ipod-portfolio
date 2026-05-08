@@ -1,12 +1,20 @@
 export const profile = {
   name: "Yashpreet Voladoddi",
   title: "AI Engineer",
+  targetRole: "Applied AI Engineer",
   location: "Bangalore, India",
   email: "yash.voladoddi2@gmail.com",
   phone: "+91 9606897799",
   linkedin: "https://www.linkedin.com/in/yashpreet-voladoddi/",
   github: "https://github.com/yashvoladoddi37",
-  summary: "Hey! I'm Yashpreet, an AI Engineer currently building at Kapi AI in Bangalore. I live at the intersection of tech and creativity—if I'm not fine-tuning models or building agentic workflows, I'm probably obsessing over fashion or the Honda NSX (NOT ACURA!!!). I've also got a massive love for trap hiphop and Sade; there's almost always something playing in my headphones. For me, it's all about making things that don't just work well, but look and feel premium.",
+  resumeUrl: "/Yashpreet_Voladoddi_Resume_2026.pdf",
+  summary: "AI Engineer with hands-on experience building products from zero to one, specializing in Generative AI, agentic workflows, and production-ready RAG systems. I build scalable AI platforms using Azure OpenAI, AWS, Golang, Python, and TypeScript, with ownership from prototype through deployment.",
+  focus: "I build applied AI systems where product quality, backend reliability, and model behavior all matter. My work is strongest in production RAG, LLM agents, observability, and integrations that move from prototype to shipped product.",
+  proofPoints: [
+    "Built multi-tenant RAG and Azure OpenAI workflows at Kapi AI across Go, Node.js, Python, and Next.js.",
+    "Shipped ReAct-style agents with tool calling, human approvals, PII guardrails, and Langfuse observability.",
+    "Reduced lead-generation cost by 80% and automated workflows processing 500+ leads/month at HeyCoach."
+  ],
   photoUrl: "/profile-pic.jpeg"
 };
 
@@ -18,9 +26,9 @@ export const experiences = [
     location: "Bangalore, India",
     bullets: [
       "Engineered scalable RAG pipelines and managed Azure OpenAI endpoints for multi-tenant GenAI environments, focusing on hybrid retrieval, prompt optimization, and structured output.",
-      "Programmed multi-step ReAct agent workflows—including a compliance-aware SDR agent—with tool-calling, human-in-the-loop approvals, and PII redacting guardrails.",
+      "Programmed multi-step ReAct agent workflows, including a compliance-aware SDR agent with tool calling, human approvals, and PII redaction guardrails.",
       "Integrated Langfuse for system observability and built a visual GenAI App Builder (Next.js, ReactFlow) with unified Composio tool authentication.",
-      "Contributed 350+ commits over 9 months as an early engineering team member, driving 0→1 AI product delivery across Golang (CLI), Node.js (API), and Python (AI services)."
+      "Contributed 350+ commits as an early engineering team member, shipping zero-to-one AI products across Golang (CLI), Node.js (API), and Python (AI services)."
     ]
   },
   {
@@ -30,16 +38,16 @@ export const experiences = [
     location: "Bangalore, India",
     bullets: [
       "Achieved an 80% cost reduction per lead and a 10% response rate by prototyping an AI-driven lead generation MVP and scaling the outreach workflow using Mistral 7B LLM.",
-      "Saved ∼25 manual hours monthly by deploying LangGraph AI agents for social media workflows, while establishing CRM API integrations to process 500+ leads/month."
+      "Saved about 25 manual hours monthly by deploying LangGraph AI agents for social media workflows and CRM integrations that process 500+ leads/month."
     ]
   },
   {
-    company: "Lumio TV – Circuit House",
+    company: "Lumio TV, Circuit House",
     role: "Backend AI Intern",
     duration: "Sep 2024 - Nov 2024",
     location: "Bangalore, India",
     bullets: [
-      "Reduced server load by ∼35% and improved response times by 30-40% by developing Golang AWS Lambda APIs featuring Redis caching.",
+      "Reduced server load by about 35% and improved response times by 30-40% by developing Golang AWS Lambda APIs with Redis caching.",
       "Fine-tuned LLaMA 3.2 (11B) and T5 models for systematic metadata extraction, and provisioned the backing AWS infrastructure using Terraform (IaC)."
     ]
   },
@@ -59,16 +67,16 @@ export const projects = [
     id: "plum-claims",
     name: "Plum Claims",
     description: "AI Insurance Claim Adjudication",
-    link: "https://plum-claims-production.up.railway.app", // Updated from resume
+    link: "https://plum-claims-production.up.railway.app",
     bullets: [
-      "Constructed a mock agentic AI claims system using Vercel AI SDK and Llama, featuring a real-time SSE streaming pipeline for live reasoning visualization.",
+      "Constructed an agentic AI claims adjudication system using Vercel AI SDK and Llama, featuring a real-time SSE streaming pipeline for live reasoning visualization.",
       "Delivered an 80% zero-API-cost extraction rate via a 3-tier OCR cascade pipeline, and evaluated hybrid confidence scoring using a RAG-augmented vector store."
     ]
   },
   {
     id: "paysense-concierge",
-    name: "PaySense Agentic AI Hackathon Finalist Demo",
-    description: "Top 10 Hackathon Finalist Pine Labs Playground AI Hackathon 2025",
+    name: "PaySense Agentic Concierge",
+    description: "Top 10 Finalist, Pine Labs Playground AI Hackathon 2025",
     link: "https://drive.google.com/file/d/1--c62UaGqfqhc07RLNWP-E8oN3xtTZkW/view",
     bullets: [
       "Prototyped a multi-agent e-commerce workflow using AWS Bedrock (Claude Sonnet), placing in the Top 10 out of hundreds of participants."

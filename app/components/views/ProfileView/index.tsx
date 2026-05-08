@@ -41,6 +41,40 @@ const TitleText = styled.h3`
   letter-spacing: 0.1em;
 `;
 
+const Section = styled.div`
+  padding: ${Unit.MD};
+  text-align: left;
+`;
+
+const SectionTitle = styled.div`
+  margin-bottom: ${Unit.SM};
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+`;
+
+const Pitch = styled.p`
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #222;
+  text-align: left;
+`;
+
+const ProofList = styled.ul`
+  margin: 0;
+  padding-left: ${Unit.LG};
+`;
+
+const ProofItem = styled.li`
+  margin-bottom: ${Unit.SM};
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: #222;
+`;
+
 const Hint = styled.div`
   font-size: 0.75rem;
   color: #888;
@@ -59,15 +93,47 @@ const ProfileView = () => {
         <HeaderContainer>
           <Photo src={profile.photoUrl} alt={profile.name} />
           <Name>{profile.name}</Name>
-          <TitleText>{profile.title}</TitleText>
+          <TitleText>{profile.targetRole}</TitleText>
         </HeaderContainer>
       ),
       selectable: false,
     },
     {
       type: "text",
-      label: profile.summary,
+      label: (
+        <Section>
+          <SectionTitle>Focus</SectionTitle>
+          <Pitch>{profile.focus}</Pitch>
+        </Section>
+      ),
       selectable: false,
+    },
+    ...profile.proofPoints.map((proof) => ({
+      type: "text" as const,
+      label: (
+        <Section>
+          <ProofList>
+            <ProofItem>{proof}</ProofItem>
+          </ProofList>
+        </Section>
+      ),
+      selectable: false,
+    })),
+    {
+      type: "text",
+      label: (
+        <Section>
+          <SectionTitle>Summary</SectionTitle>
+          <Pitch>{profile.summary}</Pitch>
+        </Section>
+      ),
+      selectable: false,
+    },
+    {
+      type: "link",
+      label: "Resume PDF",
+      url: profile.resumeUrl,
+      sublabel: "Open full resume",
     },
     {
       type: "link",
@@ -83,7 +149,7 @@ const ProfileView = () => {
     },
     {
       type: "link",
-      label: "Email Me",
+      label: "Email",
       url: `mailto:${profile.email}`,
       sublabel: profile.email,
     },

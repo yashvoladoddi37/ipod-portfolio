@@ -3,11 +3,11 @@ import { Metadata, Viewport } from "next";
 import "./styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "yv's portfolio | AI Engineer",
-  description: "A unique interactive iPod-style resume and portfolio for Yashpreet Voladoddi, AI Engineer.",
+  title: "Yashpreet Voladoddi | Applied AI Engineer",
+  description: "Applied AI Engineer building production RAG systems, LLM agents, backend integrations, and GenAI product workflows across Azure OpenAI, AWS, Golang, Python, and TypeScript.",
   openGraph: {
-    title: "yv's portfolio | AI Engineer",
-    description: "Interactive iPod-style resume for Yashpreet Voladoddi.",
+    title: "Yashpreet Voladoddi | Applied AI Engineer",
+    description: "Portfolio and resume for Yashpreet Voladoddi, Applied AI Engineer.",
     type: "website",
   },
 };
@@ -38,7 +38,6 @@ export default function RootLayout({
     </html>
   );
 }
-
 
 
 

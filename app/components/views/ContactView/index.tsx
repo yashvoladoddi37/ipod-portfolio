@@ -11,6 +11,12 @@ const ContactView = () => {
     () => [
       {
         type: "link",
+        label: "Resume",
+        sublabel: "Yashpreet_Voladoddi_Resume_2026.pdf",
+        url: profile.resumeUrl,
+      },
+      {
+        type: "link",
         label: "Email",
         sublabel: profile.email,
         url: `mailto:${profile.email}`,
@@ -28,10 +34,10 @@ const ContactView = () => {
         url: profile.github,
       },
       {
-        type: "action",
+        type: "link",
         label: "Phone",
         sublabel: profile.phone,
-        onSelect: () => {},
+        url: `tel:${profile.phone.replace(/\s/g, "")}`,
       },
     ],
     []

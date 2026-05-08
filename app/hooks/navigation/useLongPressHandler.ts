@@ -24,14 +24,16 @@ export const useLongPressHandler = ({
     timeoutRef.current = null;
   }, []);
 
-  const handlePointerDown = useCallback(() => {
+  const handlePointerDown = useCallback((event: React.PointerEvent) => {
+    event.stopPropagation();
     timeoutRef.current = setTimeout(() => {
       wasLongPressActivated.current = true;
       onLongPress();
     }, longPressThreshold);
   }, [longPressThreshold, onLongPress]);
 
-  const handlePointerUp = useCallback(() => {
+  const handlePointerUp = useCallback((event: React.PointerEvent) => {
+    event.stopPropagation();
     if (wasLongPressActivated.current) {
       wasLongPressActivated.current = false;
     } else {
@@ -40,7 +42,8 @@ export const useLongPressHandler = ({
     handleClearTimeout();
   }, [handleClearTimeout, onPress]);
 
-  const handlePointerCancel = useCallback(() => {
+  const handlePointerCancel = useCallback((event: React.PointerEvent) => {
+    event.stopPropagation();
     handleClearTimeout();
   }, [handleClearTimeout]);
 

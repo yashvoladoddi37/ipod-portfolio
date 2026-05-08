@@ -23,6 +23,7 @@ import {
   useScrollHandler,
   useViewContext,
 } from "hooks";
+import { profile } from "lib/resumeData";
 import { IpodEvent } from "utils/events";
 
 const strings = {
@@ -37,13 +38,8 @@ const HomeView = () => {
     () => [
       {
         type: "view",
-        label: strings.music,
-        viewId: viewConfigMap.music.id,
-        component: () => <MusicView />,
-      },
-      {
-        type: "view",
-        label: "About Me",
+        label: "Profile",
+        sublabel: profile.targetRole,
         viewId: viewConfigMap.profile.id,
         component: () => <ProfileView />,
         preview: SplitScreenPreview.Profile,
@@ -58,16 +54,33 @@ const HomeView = () => {
       {
         type: "view",
         label: "Projects",
+        sublabel: "Case studies & demos",
         viewId: viewConfigMap.projects.id,
         component: () => <ProjectsView />,
         preview: SplitScreenPreview.Projects,
       },
       {
+        type: "link",
+        label: "Resume PDF",
+        sublabel: "Open resume",
+        url: profile.resumeUrl,
+        preview: SplitScreenPreview.Profile,
+      },
+      {
         type: "view",
         label: "Skills",
+        sublabel: "AI, backend, cloud",
         viewId: viewConfigMap.skills.id,
         component: () => <SkillsView />,
         preview: SplitScreenPreview.Skills,
+      },
+      {
+        type: "view",
+        label: "Contact",
+        sublabel: "Email, LinkedIn, GitHub",
+        viewId: viewConfigMap.contact.id,
+        component: () => <ContactView />,
+        preview: SplitScreenPreview.Contact,
       },
       {
         type: "view",
@@ -78,10 +91,10 @@ const HomeView = () => {
       },
       {
         type: "view",
-        label: "Contact",
-        viewId: viewConfigMap.contact.id,
-        component: () => <ContactView />,
-        preview: SplitScreenPreview.Contact,
+        label: strings.music,
+        sublabel: "Personal iPod layer",
+        viewId: viewConfigMap.music.id,
+        component: () => <MusicView />,
       },
       {
         type: "view",
@@ -120,4 +133,3 @@ const HomeView = () => {
 };
 
 export default HomeView;
-

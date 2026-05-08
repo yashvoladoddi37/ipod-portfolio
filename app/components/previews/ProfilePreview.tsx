@@ -40,11 +40,20 @@ const Title = styled.div`
   letter-spacing: 0.12em;
 `;
 
+const Signal = styled.div`
+  margin-top: ${Unit.SM};
+  max-width: 160px;
+  font-size: 10px;
+  line-height: 1.35;
+  color: #333;
+`;
+
 const ProfilePreview = () => (
   <Container>
     <Photo src={profile.photoUrl} alt={profile.name} />
     <Name>{profile.name}</Name>
-    <Title>{profile.title}</Title>
+    <Title>{profile.targetRole}</Title>
+    <Signal>RAG systems, LLM agents, backend integrations</Signal>
   </Container>
 );
 

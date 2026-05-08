@@ -8,7 +8,7 @@ export const Shell = styled.div<{ $deviceTheme: DeviceThemeName }>`
   flex-direction: column;
   height: 100%;
   width: 380px;
-  height: 600px;
+  height: 650px;
   max-height: 90vh;
   margin: auto;
   border-radius: 30px;
@@ -83,7 +83,7 @@ export const ViewArea = styled.div`
 `;
 
 export const ClickWheelContainer = styled.div`
-  margin: auto;
+  margin: ${Unit.XL} auto;
 `;
 
 export const Sticker = styled.div<{ $deviceTheme: DeviceThemeName }>`

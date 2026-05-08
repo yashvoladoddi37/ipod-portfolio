@@ -50,7 +50,7 @@ export const convertApplePlaylist = (
   data: any
 ): MediaApi.Playlist => ({
   id: data.id,
-  name: data.attributes?.name ?? "–",
+    name: data.attributes?.name ?? "-",
   url: data.href ?? "",
   curatorName: data.attributes?.curatorName ?? "",
   artwork: {
@@ -97,7 +97,7 @@ export const convertAppleAlbum = (
   data: any
 ): MediaApi.Album => ({
   id: data.id,
-  name: data.attributes?.name ?? "–",
+    name: data.attributes?.name ?? "-",
   artistName: data.attributes?.artistName,
   url: data.href ?? "",
   artwork: {
@@ -132,7 +132,7 @@ export const convertAppleArtist = (
   data: any
 ): MediaApi.Artist => ({
   id: data.id,
-  name: data.attributes?.name ?? "–",
+    name: data.attributes?.name ?? "-",
   url: data.attributes?.url ?? "",
   albums: data.relationships?.albums?.data.map(convertAppleAlbum) ?? [],
 });

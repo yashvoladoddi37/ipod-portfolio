@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 
 import styled, { css } from "styled-components";
 
@@ -6,7 +6,8 @@ import FastForwardIcon from "./icons/FastForwardIcon";
 import MenuIcon from "./icons/MenuIcon";
 import PlayPauseIcon from "./icons/PlayPauseIcon";
 import RewindIcon from "./icons/RewindIcon";
-import { motion, PanInfo, useMotionValue } from "framer-motion";
+import { motion, PanInfo, useMotionValue, AnimatePresence } from "framer-motion";
+import ScrollIndicator from "./ScrollIndicator";
 import {
   checkIsPointWithinElement,
   getAngleBetweenPoints,
@@ -101,6 +102,8 @@ export const ClickWheel = () => {
   const fastForwardButtonRef = useRef<HTMLDivElement>(null);
   const playPauseButtonRef = useRef<HTMLDivElement>(null);
 
+  const [hasInteracted, setHasInteracted] = useState(false);
+
   const isPanningMotionValue = useMotionValue(false);
   const startPointMotionValue = useMotionValue({
     x: 0,
@@ -144,6 +147,7 @@ export const ClickWheel = () => {
         startPointMotionValue.set(currentPoint);
 
         dispatchScrollEvent(direction);
+        setHasInteracted(true);
       }
     },
     [startPointMotionValue]
@@ -175,6 +179,7 @@ export const ClickWheel = () => {
 
   const handlePanStart = useCallback(
     (event: PointerEvent) => {
+      setHasInteracted(true);
       isPanningMotionValue.set(true);
 
       startPointMotionValue.set({
@@ -187,6 +192,7 @@ export const ClickWheel = () => {
 
   const handlePress = useCallback(
     (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      setHasInteracted(true);
       // If the user is panning, we ignore the press event
       if (isPanningMotionValue.get()) {
         return;
@@ -207,6 +213,7 @@ export const ClickWheel = () => {
   );
 
   const handleCenterButtonPress = useCallback(() => {
+    setHasInteracted(true);
     // If the user is panning and ends on the center button, we ignore the press event.
     if (isPanningMotionValue.get()) {
       return;
@@ -225,6 +232,13 @@ export const ClickWheel = () => {
     onPress: handleCenterButtonPress,
     onLongPress: handleCenterButtonLongPress,
   });
+
+  const handleCenterButtonClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      event.stopPropagation();
+    },
+    []
+  );
 
   return (
     <RootContainer
@@ -245,6 +259,7 @@ export const ClickWheel = () => {
         <CenterButton
           size={90}
           $deviceTheme={deviceTheme}
+          onClick={handleCenterButtonClick}
           {...longPressHandlerProps}
         />
       </ButtonContainer>
@@ -254,6 +269,9 @@ export const ClickWheel = () => {
       <ButtonContainer ref={playPauseButtonRef} $placement="end center">
         <PlayPauseIcon color={iconColor} />
       </ButtonContainer>
+      <AnimatePresence>
+        {!hasInteracted && <ScrollIndicator color={iconColor} />}
+      </AnimatePresence>
     </RootContainer>
   );
 };

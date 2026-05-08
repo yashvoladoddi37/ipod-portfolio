@@ -37,6 +37,22 @@ const getInitIndex = (
   return 0;
 };
 
+const openLink = (url: string) => {
+  const isTouchPrimary =
+    window.matchMedia?.("(pointer: coarse)")?.matches ?? false;
+
+  if (isTouchPrimary) {
+    window.location.assign(url);
+    return;
+  }
+
+  const openedWindow = window.open(url, "_blank", "noopener,noreferrer");
+
+  if (!openedWindow) {
+    window.location.assign(url);
+  }
+};
+
 /** Accepts a list of options and will maintain a scroll index capped at the list's length. */
 const useScrollHandler = (
   /** This should match the view's viewId (to enable/disable events for hidden views). */
@@ -179,7 +195,7 @@ const useScrollHandler = (
         }
         break;
       case "link":
-        window.open(option.url, "_blank");
+        openLink(option.url);
         break;
       case "view":
         handleShowView(option.viewId, option.component, option.headerTitle);
@@ -231,7 +247,7 @@ const useScrollHandler = (
   useEffect(() => {
     if (!options.length) return;
 
-    // Transition from inactive -> active
+    // Transition from inactive to active.
     if (!wasActiveRef.current && isActive) {
       setIndex((prev) => (prev > options.length - 1 ? 0 : prev));
     }

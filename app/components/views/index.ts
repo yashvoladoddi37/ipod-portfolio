@@ -48,7 +48,7 @@ export const viewConfigMap: Record<string, ViewConfig> = {
   
   profile: {
     id: "profile",
-    title: "About Me",
+    title: "Profile",
     type: "screen",
     isSplitScreen: false,
     preview: SplitScreenPreview.Profile,
@@ -249,4 +249,3 @@ export const viewConfigMap: Record<string, ViewConfig> = {
 };
 
 export default viewConfigMap;
-

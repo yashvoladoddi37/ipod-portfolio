@@ -31,7 +31,7 @@ export const encodeImageUrl = (url: string) => {
 
 export const setDocumentSongTitle = (song?: any) => {
   document.title = song
-    ? `${song.attributes?.name ?? "Music"} – iPod.js`
+    ? `${song.attributes?.name ?? "Music"} - iPod.js`
     : "iPod.js";
 };
 
@@ -41,7 +41,7 @@ export const getMediaOptions = (
   id: string
 ): SelectableListOption[] => {
   // Safeguard: if MusicKit is not available (e.g. local-only playback),
-  // don't crash the UI – just return no extra media options.
+  // Don't crash the UI. Just return no extra media options.
   if (typeof window === "undefined" || !(window as any).MusicKit) {
     return [];
   }

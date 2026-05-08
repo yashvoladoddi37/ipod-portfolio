@@ -1,6 +1,7 @@
 import { SelectableList, SelectableListOption } from "components";
 import { viewConfigMap } from "components/views";
 import { useMenuHideView, useScrollHandler } from "hooks";
+import { profile } from "lib/resumeData";
 import styled from "styled-components";
 import { Unit } from "utils/constants";
 
@@ -33,23 +34,23 @@ const AboutView = () => {
   const options: SelectableListOption[] = [
     {
       type: "link",
-      label: "My LinkedIn",
-      url: "https://www.linkedin.com/in/yashpreet-voladoddi/",
+      label: "Resume PDF",
+      url: profile.resumeUrl,
     },
     {
       type: "link",
-      label: "My Instagram",
-      url: "https://www.instagram.com/yashvoladoddi/",
+      label: "LinkedIn",
+      url: profile.linkedin,
     },
     {
       type: "link",
-      label: "The Project GitHub",
+      label: "GitHub",
+      url: profile.github,
+    },
+    {
+      type: "link",
+      label: "Portfolio Source",
       url: "https://github.com/yashvoladoddi37/ipod-portfolio",
-    },
-    {
-      type: "link",
-      label: "My Spotify",
-      url: "https://open.spotify.com/user/31k4lduzutgqaoonc3mbgzf6wx3i?si=c668407bce0c4357",
     },
     {
       type: "link",
@@ -64,7 +65,7 @@ const AboutView = () => {
     <Container>
       <ListContainer>
         <TitleContainer>
-          <Title>yv's portfolio</Title>
+          <Title>Yashpreet Voladoddi</Title>
         </TitleContainer>
         <SelectableList options={options} activeIndex={scrollIndex} />
       </ListContainer>
